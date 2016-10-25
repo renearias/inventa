@@ -2,7 +2,7 @@ security:
 
     encoders:
 
-        Multiservices\ArxisBundle\Entity\Usuario:
+        FOS\UserBundle\Model\UserInterface: 
             algorithm: sha512
             encode-as-base64: true
             iterations: 10
@@ -14,28 +14,30 @@ security:
 
 
     providers:
-        user_db:
-            entity: {class: AppBundle\Entity\Usuario, property: username}
+        fos_userbundle:
+            id: fos_user.user_provider.username
     firewalls:
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+        # the login page has to be accessible for everybody
         login:
-            pattern:  ^/login$
-            security: false
+            pattern:  ^/(login$|register)
+            anonymous: true
+        resetting:
+            pattern:  ^/resetting/(request|send-email|check-email|reset|reset/$)
+            anonymous: true    
 
         secured_area:
             pattern:    ^/
             form_login:
-                check_path: _security_check
-                login_path: _arxis_login
-                default_target_path: _login_ok
-                always_use_default_target_path: true 
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
             logout:
-                path:   _logout_ok
-                target: _arxis_login
+                 path:   fos_user_security_logout
+                 target: fos_user_security_login
+            anonymous:   false
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
