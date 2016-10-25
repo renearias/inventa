@@ -1,0 +1,6 @@
+multiservices_inventario:
+    resource: "@MultiservicesInventarioBundle/Resources/config/routing.yml"
+    prefix:   /
+
+_multiservices_arxis:
+    resource: "@MultiservicesArxisBundle/Resources/config/routing.yml"
