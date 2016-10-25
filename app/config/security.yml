@@ -26,16 +26,16 @@ security:
             pattern:  ^/login$
             security: false
 
-        #secured_area:
-        #    pattern:    ^/
-        #    form_login:
-        #        check_path: _security_check
-        #        login_path: _arxis_login
-        #        default_target_path: _login_ok
-        #        always_use_default_target_path: true 
-        #    logout:
-        #        path:   _logout_ok
-        #        target: _arxis_login
+        secured_area:
+            pattern:    ^/
+            form_login:
+                check_path: _security_check
+                login_path: _arxis_login
+                default_target_path: _login_ok
+                always_use_default_target_path: true 
+            logout:
+                path:   _logout_ok
+                target: _arxis_login
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
