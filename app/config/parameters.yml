@@ -1,1 +1,17 @@
-{ parameters: { database_driver: pdo_mysql, database_host: localhost, database_port: null, database_name: inventa, database_user: root, database_password: null, mailer_transport: smtp, mailer_host: 127.0.0.1, mailer_user: null, mailer_password: null, locale: en, secret: a834e088869371aa0b0080a5d919a3aeea94cf0a, debug_toolbar: true, debug_redirects: false, use_assetic_controller: true, database_path: null }}
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name: inventa
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: a834e088869371aa0b0080a5d919a3aeea94cf0a
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true

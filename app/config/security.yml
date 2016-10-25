@@ -15,7 +15,7 @@ security:
 
     providers:
         user_db:
-            entity: {class: Multiservices\ArxisBundle\Entity\Usuario, property: username}
+            entity: {class: AppBundle\Entity\Usuario, property: username}
     firewalls:
 
         dev:
