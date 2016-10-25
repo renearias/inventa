@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\Librodiario" table="librodiario">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="fecha" type="date" column="fecha" nullable="false"/>
+    <field name="tipodocumento" type="string" column="tipodocumento" length="1" nullable="false"/>
+    <field name="coddocumento" type="string" column="coddocumento" length="20" nullable="false"/>
+    <field name="codcomercial" type="integer" column="codcomercial" nullable="false"/>
+    <field name="codformapago" type="integer" column="codformapago" nullable="false"/>
+    <field name="numpago" type="string" column="numpago" length="30" nullable="false"/>
+    <field name="total" type="float" column="total" precision="10" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

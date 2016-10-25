@@ -1,0 +1,74 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+
+{% block content -%}
+    <h1>Proveedores</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>RUC</th>
+                <td>{{ entity.ruc }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ entity.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Codprovincia</th>
+                <td>{{ entity.codprovincia }}</td>
+            </tr>
+            <tr>
+                <th>Ciudad</th>
+                <td>{{ entity.ciudad }}</td>
+            </tr>
+            <tr>
+                <th>Codentidad</th>
+                <td>{{ entity.codentidad }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ entity.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Movil</th>
+                <td>{{ entity.movil }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Web</th>
+                <td>{{ entity.web }}</td>
+            </tr>
+            <tr>
+                <th>Codproveedor</th>
+                <td>{{ entity.codproveedor }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('proveedores') }}">
+            Regresar a la Lista
+        </a>
+    </li>
+    <li>
+        <a href="#{{ path('proveedores_edit', { 'id': entity.codproveedor }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+</ul>
+<script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+	};
+</script>
+{% endblock %}

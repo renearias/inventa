@@ -1,0 +1,52 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+
+{% block content -%}
+    <h1>Pedidoslinea</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Numlinea</th>
+                <td>{{ entity.numlinea }}</td>
+            </tr>
+            <tr>
+                <th>Codfamilia</th>
+                <td>{{ entity.codfamilia }}</td>
+            </tr>
+            <tr>
+                <th>Cantidad</th>
+                <td>{{ entity.cantidad }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ entity.precio }}</td>
+            </tr>
+            <tr>
+                <th>Importe</th>
+                <td>{{ entity.importe }}</td>
+            </tr>
+            <tr>
+                <th>Dcto</th>
+                <td>{{ entity.dcto }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('pedidoslinea') }}">
+            Regresar a la Lista
+        </a>
+    </li>
+    <li>
+        <a href="#{{ path('pedidoslinea_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+</ul>
+{% endblock %}

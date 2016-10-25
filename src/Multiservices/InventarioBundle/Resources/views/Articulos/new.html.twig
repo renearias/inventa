@@ -1,0 +1,48 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+    <h1>Articulos creacion</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('articulos') }}">
+            Regresar a la Lista
+        </a>
+    </li>
+</ul>
+            <script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script>
+<script type="text/javascript">
+
+	pageSetUp();
+	
+        
+        
+      
+
+                            
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 */
+	
+	// PAGE RELATED SCRIPTS
+	
+	// pagefunction	
+	var pagefunction = function() {
+		//console.log("cleared");
+		
+	  
+	    
+
+	};
+
+
+</script> 
+{% endblock %}

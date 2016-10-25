@@ -1,0 +1,17 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+
+
+    <h1>Equipos</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('articulosdetalle') }}">
+            Regresar a la lista
+        </a>
+    </li>
+</ul>
+        <script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
+{% endblock %}

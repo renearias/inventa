@@ -1,0 +1,41 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+    <h1>Familias</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Borrado</th>
+                <td>{{ entity.borrado }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('familias') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="#{{ path('familias_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+    <script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+	};
+</script>
+{% endblock %}

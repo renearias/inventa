@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\Factulineap" table="factulineap">
+      <entity-listeners>
+            <entity-listener class="Multiservices\InventarioBundle\EventListener\FactulineapListener">
+                <lifecycle-callback  type= "preFlush"       method= "preFlushHandler" /> 
+                <lifecycle-callback  type= "postLoad"       method= "postLoadHandler" />
+
+                <lifecycle-callback  type= "postPersist"    method= "postPersistHandler" /> 
+                <lifecycle-callback  type= "prePersist"     method= "prePersistHandler" />
+
+                <lifecycle-callback  type= "postUpdate"     method= "postUpdateHandler" /> 
+                <lifecycle-callback  type= "preUpdate"      method= "preUpdateHandler" />
+
+                <lifecycle-callback  type= "postRemove"     method= "postRemoveHandler" /> 
+                <lifecycle-callback  type= "preRemove"      method= "preRemoveHandler" /> 
+            </entity-listener>
+        </entity-listeners> 
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+  </id>
+  
+    <many-to-one field="codfactura" target-entity="Facturasp" inversed-by="compra_articulos">
+      <join-columns>
+        <join-column name="codfactura" referenced-column-name="codfactura"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="codproveedor" target-entity="Proveedores">
+      <join-columns>
+        <join-column name="codproveedor" referenced-column-name="codproveedor"/>
+      </join-columns>
+    </many-to-one>
+   
+   <many-to-one field="codigo" target-entity="Articulos">
+      <join-columns>
+        <join-column name="codigo" referenced-column-name="codarticulo"/>
+      </join-columns>
+      
+    </many-to-one>
+    
+    
+    <one-to-many field="articulosdetail" target-entity="ArticulosDetalle" mapped-by="codfactulinea">
+    <cascade>
+                <cascade-all/>
+    </cascade>
+    </one-to-many>
+    
+    
+    <unique-constraints>
+        <unique-constraint columns="codfactura,codproveedor,codigo" name="buscar_articulo" />
+    </unique-constraints>
+      
+    <field name="numlinea" type="integer" column="numlinea" nullable="true"/>
+    <field name="codfamilia" type="integer" column="codfamilia" nullable="true"/>
+    
+    <field name="cantidad" type="float" column="cantidad" precision="10" scale="0" nullable="false"/>
+    <field name="precio" type="float" column="precio" precision="10" scale="0" nullable="false"/>
+    <field name="importe" type="float" column="importe" precision="10" scale="0" nullable="true"/>
+    <field name="dcto" type="boolean" column="dcto" nullable="true"/>
+  </entity>
+</doctrine-mapping>

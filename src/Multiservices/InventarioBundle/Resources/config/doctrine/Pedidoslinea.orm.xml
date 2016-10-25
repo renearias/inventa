@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\Pedidoslinea" table="pedidoslinea">
+  <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+  </id>
+    <many-to-one field="codpedido" target-entity="Pedidos" inversed-by="pedido_articulos">
+      <join-columns>
+        <join-column name="codpedido" referenced-column-name="codpedido"/>
+      </join-columns>
+    </many-to-one>
+   
+   <many-to-one field="codigo" target-entity="Articulos">
+      <join-columns>
+        <join-column name="codigo" referenced-column-name="codarticulo"/>
+      </join-columns>
+      
+    </many-to-one>
+    
+    <unique-constraints>
+        <unique-constraint columns="codpedido,codigo" name="buscar_articulo" />
+    </unique-constraints>
+    <!--<id name="numlinea" type="integer" column="numlinea"/>-->
+    <field name="numlinea" type="integer" column="numlinea" nullable="true"/>
+    <field name="codfamilia" type="integer" column="codfamilia" nullable="true"/>
+    <!--<field name="codigo" type="string" column="codigo" length="15" nullable="true"/>-->
+    <field name="cantidad" type="float" column="cantidad" precision="10" scale="0" nullable="false"/>
+    <field name="precio" type="float" column="precio" precision="10" scale="0" nullable="true"/>
+    <field name="importe" type="float" column="importe" precision="10" scale="0" nullable="true"/>
+    <field name="dcto" type="integer" column="dcto" nullable="true"/>
+  </entity>
+</doctrine-mapping>

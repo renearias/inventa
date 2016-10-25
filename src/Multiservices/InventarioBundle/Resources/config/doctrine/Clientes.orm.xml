@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\Clientes" table="clientes">
+    <indexes>
+      <index name="nombre" columns="nombre"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="400" nullable="true"/>
+    
+    <field name="saldo" type="string" column="saldo" length="300" nullable="true"/>
+    <field name="fecha" type="date" column="fecha" nullable="false"/>
+    
+    <field name="estado" type="string" column="estado" length="300" nullable="true"/>
+    <field name="correo" type="string" column="correo" length="50" nullable="false"/>
+    <field name="telefono" type="string" column="telefono" length="50" nullable="false"/>
+    
+    
+    <!--<one-to-one field="mac"  target-entity="Multiservices\InventarioBundle\Entity\ArticulosDetalle">
+        <join-column name="mac" referenced-column-name="codunico"/>
+    </one-to-one>-->
+    
+    <field name="instalado" type="date" column="instalado" nullable="false"/>
+    <field name="cedula" type="string" column="cedula" length="100" nullable="false"/>
+    <field name="codigo" type="string" column="codigo" length="300" nullable="true"/>
+    <field name="direccion" type="string" column="direccion" length="300" nullable="false"/>
+    
+    <field name="referencia" type="string" column="referencia" length="300" nullable="true"/>
+    
+    <field name="status" type="string" column="status" length="300" nullable="true"/>
+    <field name="canton" type="string" column="canton" length="300" nullable="true"/>
+    <field name="provincia" type="string" column="provincia" length="300" nullable="true"/>
+    <field name="sector" type="string" column="sector" length="300" nullable="true"/>
+    <field name="registrado" type="integer" column="registrado" length="1" nullable="true"/>
+    
+      
+  </entity>
+</doctrine-mapping>

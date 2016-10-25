@@ -1,0 +1,80 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+    <h1>Pedidos</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Codpedido</th>
+                <td>{{ entity.codpedido }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Codcliente</th>
+                <td>{{ entity.codcliente }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ entity.estado }}</td>
+            </tr>
+            <tr>
+                <th>Totalpedido</th>
+                <td>{{ entity.totalpedido }}</td>
+            </tr>
+            
+            <tr>
+                <th>articulos</th>
+                <td>
+                    <ul>
+                         {% for pedidoarticulo in entity.pedidoarticulos %}
+                                <li>{{ pedidoarticulo.codigo }} - {{ pedidoarticulo.cantidad }}</li>
+                         {% endfor %} 
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('pedidos') }}">
+            Regresar a la Lista
+        </a>
+    </li>
+    <li>
+        <a href="#{{ path('pedidos_edit', { 'id': entity.codpedido }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+</ul>
+<script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script>
+<script type="text/javascript">
+
+	pageSetUp();
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 */
+	
+	// PAGE RELATED SCRIPTS
+	
+	// pagefunction	
+	var pagefunction = function() {
+		//console.log("cleared");
+		
+	  
+	    
+
+	};
+</script> 
+{% endblock %}

@@ -1,0 +1,7 @@
+multiservices_inventario_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MultiservicesInventarioBundle:Default:index }
+MultiservicesInventarioAnnotations:
+   resource: "@MultiservicesInventarioBundle/Controller/"
+   type:     annotation
+   prefix:   /

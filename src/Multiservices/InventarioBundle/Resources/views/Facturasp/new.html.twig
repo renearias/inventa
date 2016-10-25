@@ -1,0 +1,456 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+ 
+<script type="text/javascript">
+    var protocodigo=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.codigo)|e('html_attr')}}").text();
+    var protocantidad=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.cantidad)|e('html_attr')}}").text();
+    var protodetallecodunico=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.articulosdetail.vars.prototype.codunico)|e('html_attr')}}").text();
+    var protoproto=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.articulosdetail.vars.prototype)|e('html_attr')}}").text();
+    protoproto=protoproto.replace(/__name__/g, "1");
+//    alert(protoproto);
+    
+    
+       //var protocodigo="";
+      var articulos=$(protocodigo);
+     
+      var listarticulos=$(articulos).find("option").map(function() {
+                            var opt  = {};
+                            opt = '"'+$(this).val()+'":"'+$(this).text()+'"';
+                            return opt;
+                            }).get();
+      // var stringarticulos=listarticulos.join(";");
+       var stringarticulos=$.parseJSON( '{ '+listarticulos.join(",")+' }' );;
+        var formname="{{form.vars.name}}";
+        var nomcantidad=formname+"[compra_articulos][__name__][cantidad]";
+        var nomproducto=formname+"[compra_articulos][__name__][codigo]";
+        var nomprecio=formname+"[compra_articulos][__name__][precio]";
+        var nomdetallemac=formname+"[compra_articulos][__name__][articulosdetail][__name2__][codunico]";
+        var nomdetalleestatus=formname+"[compra_articulos][__name__][articulosdetail][__name2__][estatus]";
+        var nomdetallecodarticulo=formname+"[compra_articulos][__name__][articulosdetail][__name2__][codarticulo]";
+        var nomdetallecodfactura=formname+"[compra_articulos][__name__][articulosdetail][__name2__][codfactura]";
+        
+      </script>    
+<!-- row -->
+<div class="row">
+	
+	<!-- col -->
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-shopping-cart"></i> 
+				Compras
+			<span>>  
+				Nueva Compra
+			</span>
+		</h1>
+	</div>
+	<!-- end col -->
+	
+</div>
+<!-- end row --> 
+<div class="table">
+    
+    
+    
+    {{ form_start(form, {'method': 'POST'}) }}
+    {{ form_errors(form) }}
+    
+    {{ form_row(form.codfactura) }}
+    {{ form_row(form.fecha) }}
+     {{ form_row(form._token) }}
+     {{ form_row(form.codproveedor) }}
+     {{ form_row(form.fechapago) }}
+    {# reproduce únicamente los campos task: descripción 
+    {{ form_row(form.description) }}#}
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+	<!-- row -->
+	<div class="row">
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<table id="jqgrid"></table>
+				<div id="pjqgrid"></div>
+				<br />
+				<!--<a href="javascript:void(0)" id="m1">Get Selected id's</a><br>
+				<a href="javascript:void(0)" id="m1s">Select(Unselect) row 13</a>
+                                -->    
+		</article>
+		<!-- WIDGET END -->
+	</div>
+	<!-- end row -->
+</section>
+<!-- end widget grid -->
+    {{ form_row(form._token) }}
+     {{ form_row(form.submit, { 'label': 'Guardar' }) }}
+   </div>   
+    <ul class="record_actions">
+    <li>
+        <a href="#{{ path('facturasp') }}">
+            Regresar a la lista
+        </a>
+    </li>
+</ul>
+{% endblock %}
+{% block ajax_scripts %}
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+            
+            $(".select2-container").width("240px");
+                
+		loadScript("{{asset("js/plugin/jqgrid/jquery.jqGrid.min_1.js")}}", run_jqgrid_function);
+                
+		function run_jqgrid_function() {
+                    
+          
+                   
+                    			$("#jqgrid").jqGrid({
+                            
+                            
+				//data : jqgrid_data,
+				datatype : "local",
+				height : 'auto',
+				colNames : ['Actions','Producto', 'Cantidad','Precio','Total'],
+				colModel : [
+					{ name : 'act', index:'act', sortable:false }, 
+					//{ name : 'id', index : 'id' },
+					{ name : nomproducto, index : nomproducto, editable : true, editrules:{required:true}, edittype:"select",formatter:'select',editoptions:{class:"",value:stringarticulos}},
+					{ name : nomcantidad, index : nomcantidad, editable : true,editrules:{number:true,required:true}}, 
+                                        { name : nomprecio, index : nomprecio, editable : true ,editrules:{number:true,required:true}}, 
+                                        { name : "total", index : "total",formatter:'number',summaryType:'sum',summaryTpl:'Total: {0}'} 
+                                        
+					//{ name : 'amount', index : 'amount', align : "right", editable : true }, 
+					//{ name : 'tax', index : 'tax', align : "right", editable : true }, 
+					//{ name : 'total', index : 'total', align : "right", editable : true }, 
+					//{ name : 'note', index : 'note', sortable : false, editable : true }
+                                        ],
+				rownumbers: true,
+                                rowNum : 10,
+				rowList : [10, 20, 30],
+				pager : '#pjqgrid',
+				sortname : 'id',
+				toolbarfilter: true,
+				viewrecords : true,
+				sortorder : "asc",
+                                
+				gridComplete: function(){
+                                    
+                                  
+        
+        
+        
+        
+        
+                                  recalcular();  
+                                  
+                                   	var ids = $("#jqgrid").jqGrid('getDataIDs');
+					for(var i=0;i < ids.length;i++){
+						var cl = ids[i];
+						be = "<button class='btn btn-xs btn-default' type='button' data-original-title='Editar Row' onclick=\"$('#jqgrid').editRow('"+cl+"');\"><i class='fa fa-pencil'></i></button>"; 
+						//se = "<button class='btn btn-xs btn-default' type='button' data-original-title='Save Row' onclick=\"$('#jqgrid').saveRow('"+cl+"');\"><i class='fa fa-save'></i></button>";
+						ca = "<button class='btn btn-xs btn-default' type='button' data-original-title='Cancel' onclick=\"$('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>";  
+						//ce = "<button class='btn btn-xs btn-default' onclick=\"$('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>"; 
+						//$("#jqgrid").jqGrid('setRowData',ids[i],{act:be+se+ce});
+						$("#jqgrid").jqGrid('setRowData',ids[i],{act:be+ca});
+					}	
+				},
+				editurl : "{{asset("dummy.html")}}",
+				caption : "Articulos",
+				//multiselect : true,
+				autowidth : true,
+                                
+                                footerrow: true,
+                               // userDataOnFooter: true,
+                                subGrid: true,
+                                subGridOptions: {
+                                       // "plusicon"  : "ui-icon-triangle-1-e",
+                                       // "minusicon" : "ui-icon-triangle-1-s",
+                                       // "openicon"  : "ui-icon-arrowreturn-1-e",
+                                                // load the subgrid data only once
+                                                // and the just show/hide
+                                                "reloadOnExpand" : false,
+                                                // select the row when the expand column is clicked
+                                                "selectOnExpand" : true
+                                        },
+                                subGridRowExpanded: function(subgrid_id, row_id) {
+                                        // we pass two parameters
+                                        // subgrid_id is a id of the div tag created whitin a table data
+                                        // the id of this elemenet is a combination of the "sg_" + id of the row
+                                        // the row_id is the id of the row
+                                        // If we wan to pass additinal parameters to the url we can use
+                                        // a method getRowData(row_id) - which returns associative array in type name-value
+                                        // here we can easy construct the flowing
+
+                                        
+                                        var subgrid_table_id, pager_id;
+                                        subgrid_table_id = subgrid_id+"_t";
+                                        pager_id = "p_"+subgrid_table_id;
+                                        $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+                                        jQuery("#"+subgrid_table_id).jqGrid({
+                                            
+                                                //url:"subgrid.php?q=2&id="+row_id,
+                                                
+                                               // url:route.replace("PLACEHODER", row_id),
+                                                //data : subjqgrid_data,
+                                               // datatype: "local",
+                                                colNames: ['COD / MAC / SERIAL','Estatus'],
+                                                colModel: [
+                                                        
+                                                        {name:nomdetallemac,index:nomdetallemac,width:250,editable : true},
+                                                        {name:nomdetalleestatus,index:nomdetalleestatus,width:180,align:"right"}
+                                                ],
+                                                editurl : "{{asset("dummy.html")}}",
+                                                rowNum:20,
+                                                pager: pager_id,
+                                                sortname: 'num',
+                                            sortorder: "asc",
+                                            height: '100%',
+                                            //autowidth : true,
+                                            multiselect : true
+                                            
+                                            
+                                        });
+                                        jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:false,add:false,del:true});
+                                        $("#"+subgrid_table_id).jqGrid('inlineNav', "#"+pager_id);
+                                },
+                                subGridRowColapsed: function(subgrid_id, row_id) {
+                                        // this function is called before removing the data
+                                        //var subgrid_table_id;
+                                        //subgrid_table_id = subgrid_id+"_t";
+                                        //jQuery("#"+subgrid_table_id).remove();
+                                }
+
+
+				});
+                                
+                                 
+                               function recalcular(){
+                               
+                                      var foottitle={};
+                                     foottitle[nomprecio]="Sub-Total";
+                                   
+                                    var parseTotal=  $("#jqgrid").jqGrid('getCol', 'total', false, 'sum');
+                                    foottitle['total']=parseTotal;
+                                    $("#jqgrid").jqGrid('footerData', 'set', foottitle);
+                                    
+                                    var parseIva=parseTotal*0.12;
+                                    var parseTotalConIva=parseTotal*1.12;
+                                    
+                                    var $footRow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
+                                    .next(".ui-jqgrid-sdiv")
+                                    .find("tr.footrow");
+                                  
+                                   var $jqgrid = $("#jqgrid"),
+                                        
+                                        $footerRow = $footRow,
+                                        $FooterIVARow,
+                                        $newFooterRow;
+                                        
+                                    $FooterIVARow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
+                                    .next(".ui-jqgrid-sdiv")
+                                    .find("tr.footIvarow");
+                                    if ($FooterIVARow.length === 0) {
+                                        $FooterIVARow = $footerRow.clone();
+                                        $FooterIVARow.removeClass("footrow")
+                                            .addClass("footIvarow ui-widget-content");
+                                        $FooterIVARow.insertAfter($footerRow);
+                                    }
+                                    $newFooterRow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
+                                    .next(".ui-jqgrid-sdiv")
+                                    .find("tr.myfootrow");
+                                    if ($newFooterRow.length === 0) {
+                                        // add second row of the footer if it's not exist
+                                        $newFooterRow = $footerRow.clone();
+                                        $newFooterRow.removeClass("footrow")
+                                            .addClass("myfootrow ui-widget-content");
+
+                                        $newFooterRow.insertAfter($FooterIVARow);
+                                    }
+                                    
+                                    $FooterIVARow.find(">td[aria-describedby=\"" + $jqgrid.attr("id") + "_"+nomprecio+"\"]")
+                                        .html("<b>IVA 12%:</b>"); 
+                                    $FooterIVARow.find(">td[aria-describedby=" + $jqgrid.attr("id") + "_total]")
+                                        .html("<b>"+$.fmatter.util.NumberFormat(parseIva, $.jgrid.formatter.number)+"</b>");
+                                    $newFooterRow.find(">td[aria-describedby=\"" + $jqgrid.attr("id") + "_"+nomprecio+"\"]")
+                                        .html("<b>Gran Total:</b>"); 
+                               
+                                    $newFooterRow.find(">td[aria-describedby=" + $jqgrid.attr("id") + "_total]")
+                                        .html("<b>"+$.fmatter.util.NumberFormat(parseTotalConIva, $.jgrid.formatter.number)+"</b>");
+                                   // $newFooterRow.find(">td[aria-describedby=" + this.id + "_"+nomcantidad+"]")
+                                    //$newFooterRow.find(">td[aria-describedby=" + this.id + "_total]")
+                                    //    .text($.fmatter.util.NumberFormat(totalSum, $.jgrid.formatter.number));
+                                    
+                                    
+
+                               
+                                };  
+
+                                var $footRow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
+                                    .next(".ui-jqgrid-sdiv")
+                                    .find(".footrow");
+                                var $newfootRow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
+                                    .next(".ui-jqgrid-sdiv")
+                                    .find("tr.myfootrow");
+                                    
+                                 var  $footIvaRow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
+                                    .next(".ui-jqgrid-sdiv")
+                                    .find("tr.footIvarow");   
+                                    $footRow.css("border-bottom-color", "transparent");
+                                    $footIvaRow.css("border-bottom-color", "transparent");
+                                    $newfootRow.css("border-top-color", "transparent");
+                                    $footRow.find('>td[aria-describedby="jqgrid_rn"]').css("border-right-color", "transparent");
+                                    
+                                    $footRow.find('>td[aria-describedby="jqgrid_subgrid"]').css("border-right-color", "transparent");
+                                    $footRow.find('>td[aria-describedby="jqgrid_act"]').css("border-right-color", "transparent");
+                                    $footRow.find('>td[aria-describedby="jqgrid_'+nomproducto+'"]').css("border-right-color", "transparent");
+                                    
+                                    $footIvaRow.find('>td[aria-describedby="jqgrid_rn"]').css("border-right-color", "transparent");
+                                    $footIvaRow.find('>td[aria-describedby="jqgrid_subgrid"]').css("border-right-color", "transparent");
+                                    $footIvaRow.find('>td[aria-describedby="jqgrid_act"]').css("border-right-color", "transparent");
+                                    $footIvaRow.find('>td[aria-describedby="jqgrid_'+nomproducto+'"]').css("border-right-color", "transparent");
+                                    $footIvaRow.find('>td[aria-describedby="jqgrid_'+nomprecio+'"]').css('border', '1px solid #aaa');
+                                    $footIvaRow.find('>td[aria-describedby="jqgrid_total"]').css('border', '1px solid #aaa');
+                                    
+                                    $newfootRow.find('>td[aria-describedby="jqgrid_rn"]').css("border-right-color", "transparent");
+                                    $newfootRow.find('>td[aria-describedby="jqgrid_subgrid"]').css("border-right-color", "transparent");
+                                    $newfootRow.find('>td[aria-describedby="jqgrid_act"]').css("border-right-color", "transparent");
+                                    $newfootRow.find('>td[aria-describedby="jqgrid_'+nomproducto+'"]').css("border-right-color", "transparent");
+                                
+				$("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+					edit : false,
+					add : false,
+					del : true
+				});
+                                
+                                var parameters = {
+                                    addParams : {
+                                      addRowParams:{
+                                             aftersavefunc: function(rowid, response) {
+                                                 
+                                                  var c=$("#jqgrid").getCell(rowid,nomcantidad);
+                                                  var p=$("#jqgrid").getCell(rowid,nomprecio);
+                                                  $("#jqgrid").setCell(rowid,'total',c*p);
+                                                  recalcular();
+                                      
+                                         }
+                                     }
+                                    },
+                                    editParams : {
+                                             aftersavefunc: function(rowid, response) {
+                                                  var c=$("#jqgrid").getCell(rowid,nomcantidad);
+                                                  var p=$("#jqgrid").getCell(rowid,nomprecio);
+                                                  $("#jqgrid").setCell(rowid,'total',c*p);
+                                                  recalcular();
+        
+                                         }
+                                    }
+                                 };
+                                
+				$("#jqgrid").jqGrid('inlineNav', "#pjqgrid",parameters);
+				/* Add tooltips */
+				$('.navtable .ui-pg-button').tooltip({
+					container : 'body'
+				});
+				// remove classes
+				$(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+			    $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+			    $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+			    $(".ui-jqgrid-pager").removeClass("ui-state-default");
+			    $(".ui-jqgrid").removeClass("ui-widget-content");
+			    
+			    // add classes
+			    $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+			    $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+			   
+			   
+			    $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+			    $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+			    $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+			    $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+			    $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+			    $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+			    $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+			    $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+			  
+				$( ".ui-icon.ui-icon-seek-prev" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+				$(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+				
+				$( ".ui-icon.ui-icon-seek-first" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+			  	$(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");		  	
+	
+			  	$( ".ui-icon.ui-icon-seek-next" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+			  	$(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+			  	
+			  	$( ".ui-icon.ui-icon-seek-end" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+			  	$(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+			  	
+			  	
+			  
+			  
+			    // update buttons
+			    
+			    $(window).on('resize.jqGrid', function () {
+					$("#jqgrid").jqGrid( 'setGridWidth', $("#content").width() );
+				});
+
+
+			} // end function
+                        
+	};
+	
+	loadScript("{{asset("js/plugin/jqgrid/grid.locale-es.min.js")}}", pagefunction);
+        
+        $("form").submit(function(e){
+            e.preventDefault();
+            
+            var gridData = $("#jqgrid").getRowData();
+            var gridDataIDs = $("#jqgrid").getDataIDs();
+            var formData=$(this).serializeArray();
+            gridDataIDs.forEach( function (e,rowindex) {
+                
+                $("#jqgrid").saveRow(e);
+                
+                    rowSubgridData=$("#jqgrid_"+e+"_t").getRowData();
+                   
+                    if (rowSubgridData.length>0)
+                    {
+
+                         rowSubgridData.forEach( function (ele,index) {
+
+                         ele[nomdetalleestatus]="LIBRE";
+                         ele[nomdetallecodarticulo]=gridData[rowindex][nomproducto];
+                          for (var ix in ele) {
+                           var artunico=new Object();
+                            artunico.name=ix.replace(/__name__/g, rowindex).replace(/__name2__/g, index);
+                            artunico.value=ele[ix];
+
+                            formData.splice(formData.length-1,0,artunico);
+                         }
+
+                        });
+
+                     }
+                
+               
+            });
+            gridData.forEach( function (ele,index) {
+            delete ele.act;
+            
+                 for (var i in ele) {
+                   var art=new Object();
+                    art.name=i.replace(/__name__/g, index);
+                    art.value=ele[i];
+                    
+                    formData.splice(formData.length-1,0,art);
+                 }
+            
+             
+            });
+
+            loadURLPost($(this).attr("action"),container,formData);
+       });
+</script>
+
+{% endblock %}

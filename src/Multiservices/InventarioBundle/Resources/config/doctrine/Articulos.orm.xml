@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\Articulos" table="articulos">
+    <indexes>
+      <index name="IDX_9C6F8597CD242A00" columns="codfamilia"/>
+    </indexes>
+    <id name="codarticulo" type="integer" column="codarticulo">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="codproveedor1" target-entity="Proveedores">
+      <join-columns>
+        <join-column name="codproveedor1" referenced-column-name="codproveedor"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="codproveedor2" target-entity="Proveedores">
+      <join-columns>
+        <join-column name="codproveedor2" referenced-column-name="codproveedor"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="atributos" target-entity="Atributos">
+            <join-table name="articulo_atributos">
+                <join-columns>
+                    <join-column name="articulo_id" referenced-column-name="codarticulo" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="atributo_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+    <one-to-many field="articulosdetail" target-entity="ArticulosDetalle" mapped-by="codarticulo">
+    <cascade>
+                <cascade-all/>
+    </cascade>
+    </one-to-many>    
+    <field name="referencia" type="string" column="referencia" length="20" nullable="true"/>
+    <field name="descripcion" type="text" column="descripcion" nullable="false"/>
+    <field name="impuesto" type="float" column="impuesto" precision="10" scale="0" nullable="true"/>
+    <!--<field name="codproveedor1" type="integer" column="codproveedor1" nullable="true"/>
+    <field name="codproveedor2" type="integer" column="codproveedor2" nullable="true"/>-->
+    <field name="descripcionCorta" type="string" column="descripcion_corta" length="30" nullable="true"/>
+    <field name="codubicacion" type="integer" column="codubicacion" nullable="true"/>
+    <field name="stock" type="integer" column="stock" nullable="false"/>
+    <field name="stockMinimo" type="integer" column="stock_minimo" nullable="true"/>
+    <field name="avisoMinimo" type="string" column="aviso_minimo" length="1" nullable="true"/>
+    <field name="datosProducto" type="string" column="datos_producto" length="200" nullable="true"/>
+    <field name="fechaAlta" type="date" column="fecha_alta" nullable="true"/>
+    <!--<field name="codembalaje" type="integer" column="codembalaje" nullable="true"/>-->
+    <many-to-one field="codembalaje" target-entity="Embalajes">
+      <join-columns>
+        <join-column name="codembalaje" referenced-column-name="codembalaje"/>
+      </join-columns>
+    </many-to-one>
+    <field name="unidadesCaja" type="integer" column="unidades_caja" nullable="true"/>
+    <field name="precioTicket" type="string" column="precio_ticket" length="1" nullable="true"/>
+    <field name="modificarTicket" type="string" column="modificar_ticket" length="1" nullable="true"/>
+    <field name="observaciones" type="text" column="observaciones" nullable="true"/>
+    <field name="precioCompra" type="float" column="precio_compra" precision="10" scale="0" nullable="true"/>
+    <field name="precioAlmacen" type="float" column="precio_almacen" precision="10" scale="0" nullable="true"/>
+    <field name="precioTienda" type="float" column="precio_tienda" precision="10" scale="0" nullable="true"/>
+    <field name="precioPvp" type="float" column="precio_pvp" precision="10" scale="0" nullable="true"/>
+    <field name="precioIva" type="float" column="precio_iva" precision="10" scale="0" nullable="true"/>
+    <field name="codigobarras" type="string" column="codigobarras" length="15" nullable="true"/>
+    <field name="imagen" type="string" column="imagen" length="200" nullable="true"/>
+    <field name="borrado" type="string" column="borrado" length="1" nullable="true"/>
+    <many-to-one field="codfamilia" target-entity="Familias">
+      <join-columns>
+        <join-column name="codfamilia" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

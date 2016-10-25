@@ -1,0 +1,38 @@
+{
+    {#"total": "1",
+    "page": "1",
+    "records": "2",#}
+    "rows": [
+    
+    
+                        {% for articulo in entity.articulosdetail %}
+                             {
+                             
+                                                 "id": "{{articulo.getId()}}",
+                                "cell": [
+                              
+                                    "{{ articulo.codarticulo }}",
+                                    "{{ articulo.codunico }}",
+                                    "{{ articulo.estatus }}"
+                                    
+                                ]
+                             
+                             }{% if not(loop.last) %}
+                             ,
+                             {% endif %} 
+                         {% endfor %} 
+    
+        
+        
+    ]
+}
+{#{
+    Detalle articulos
+                
+                    <ul>
+                         {% for articulo in entity.articulosdetail %}
+                                <li>{{ articulo.codarticulo }} - {{ articulo.estatus }}</li>
+                         {% endfor %} 
+                    </ul>
+     
+}#}

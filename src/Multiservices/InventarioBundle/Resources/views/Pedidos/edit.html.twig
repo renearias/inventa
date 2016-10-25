@@ -1,0 +1,26 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+    <h1>Pedidos editar</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('pedidos') }}">
+            Regresar a la Lista
+        </a>
+    </li>
+    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+</ul>
+ <script type="text/javascript">
+
+	pageSetUp();
+	var pagefunction = function() {
+		//console.log("cleared");
+	};
+$(function() {  
+        loadScript("{{asset('js/arxis-postforms.js')}}",pagefunction);
+        });
+
+</script> 
+{% endblock %}

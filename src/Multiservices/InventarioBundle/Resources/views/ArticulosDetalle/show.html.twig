@@ -1,0 +1,62 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+
+    
+    
+
+    <h1>Detalle del Producto</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Cod/MAC/Serial</th>
+                <td>{{ entity.codunico }}</td>
+            </tr>
+            <tr>
+                <th>Estatus</th>
+                <td>{{ entity.estatus }}</td>
+            </tr>
+            <tr>
+                <th>Antiguedad</th>
+                <td>{{ entity.antiguedad }}</td>
+            </tr>
+            <tr>
+                <th>Asignado a</th>
+                <td>{{ entity.usuario|default("Ningun Cliente") }}</td>
+            </tr>
+            
+            <tr>
+                <th>Atributos</th>
+                <td>{{ entity.atributos|default('Sin Atributos')}}</td>
+            </tr>
+            <tr>
+                <th>Factura</th>
+                <td>{{ entity.codfactulinea|default('Sin Factura') }}</td>
+            </tr>
+            <tr>
+                <th>Fecha de Compra</th>
+                <td>{{ entity.getFechacompra()|default('0')|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Nodo</th>
+                <td>{{ entity.nodo|default('Sin Nodo Asignado')}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+      
+    <li>
+        <a href="#{{ path('articulosdetalle') }}">
+            Regresar a la lista
+        </a>
+    </li>
+    <li>
+        <a href="#{{ path('articulosdetalle_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+</ul>
+    <script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
+{% endblock %}

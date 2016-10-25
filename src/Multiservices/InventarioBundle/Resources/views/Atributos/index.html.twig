@@ -1,0 +1,49 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+
+{% block content -%}
+    <h1>Atributos list</h1>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Atributo</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="#{{ path('atributos_show', { 'id': entity.id }) }}">{{ entity.atributo }}</a></td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="#{{ path('atributos_show', { 'id': entity.id }) }}">mostrar</a>
+                    </li>
+                    <li>
+                        <a href="#{{ path('atributos_edit', { 'id': entity.id }) }}">editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="#{{ path('atributos_new') }}">
+                Crear nuevo registro
+            </a>
+        </li>
+    </ul>
+<script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script>
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+		//console.log("cleared");
+	};
+</script> 
+{% endblock %}
+

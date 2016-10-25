@@ -1,0 +1,57 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+
+{% block content -%}
+    <h1>Solicitud de Compra</h1>
+
+    <table class="table records_list">
+        <thead>
+            <tr>
+                <th>Factura Nº</th>
+                <th>Fecha</th>
+                <th>Proveedor</th>
+                <th>Estado</th>
+                <th>Totalfactura</th>
+                <th>Fechapago</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="#{{ path('facturasp_show', { 'id': entity.codfactura }) }}">{{ entity.codfactura }}</a></td>
+                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.codproveedor }}</td>
+                <td>{{ entity.estado }}</td>
+                <td>{{ entity.totalfactura|number_format(2, '.', ',') }}</td>
+                <td>{% if entity.fechapago %}{{ entity.fechapago|date('Y-m-d H:i:s') }}{% endif %}</td>
+                
+                <td>
+                <ul>
+                    <li>
+                        <a href="#{{ path('facturasp_show', { 'id': entity.codfactura }) }}">mostrar</a>
+                    </li>
+                    <li>
+                        <a href="#{{ path('facturasp_edit', { 'id': entity.codfactura }) }}">editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="#{{ path('facturasp_new') }}">
+                Crear nuevo registro
+            </a>
+        </li>
+    </ul>
+<script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+	};
+</script>
+{% endblock %}

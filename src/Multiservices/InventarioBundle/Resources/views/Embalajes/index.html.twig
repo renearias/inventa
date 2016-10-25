@@ -1,0 +1,41 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+    <h1>Embalajes lista</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Codembalaje</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="#{{ path('embalajes_show', { 'id': entity.codembalaje }) }}">{{ entity.nombre }}</a></td>
+                
+                <td>{{ entity.codembalaje }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="#{{ path('embalajes_show', { 'id': entity.codembalaje }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="#{{ path('embalajes_edit', { 'id': entity.codembalaje }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="#{{ path('embalajes_new') }}">
+                Crear nuevo tipo de embalaje
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\ArticulosDetalle">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <many-to-one field="codarticulo" target-entity="Articulos" >
+      <join-columns>
+        <join-column name="codarticulo" referenced-column-name="codarticulo"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="codfactulinea" target-entity="Factulineap" inversed-by="articulosdetail">
+      <join-columns>
+        <join-column name="codfactulinea" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <unique-constraints>
+        <unique-constraint columns="id,codarticulo" name="buscar_detallearticulo" />
+    </unique-constraints>
+    <field name="codunico" type="string" column="codunico" length="100" unique="true"/>
+    <field name="estatus" type="string" column="estatus" length="20"/>
+    <field name="antiguedad" type="string" column="antiguedad" length="20" nullable="true"/>
+    <field name="observaciones" type="text" column="observaciones" nullable="true"/>
+    <field name="atributos" type="string" column="atributos" length="255" nullable="true"/>
+    
+  </entity>
+</doctrine-mapping>

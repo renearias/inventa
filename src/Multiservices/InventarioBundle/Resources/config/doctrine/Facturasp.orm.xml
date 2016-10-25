@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\Facturasp" table="facturasp">
+     <entity-listeners>
+            <entity-listener class="Multiservices\InventarioBundle\EventListener\FacturaspListener">
+                <lifecycle-callback  type= "preFlush"       method= "preFlushHandler" /> 
+                <lifecycle-callback  type= "postLoad"       method= "postLoadHandler" />
+
+                <lifecycle-callback  type= "postPersist"    method= "postPersistHandler" /> 
+                <lifecycle-callback  type= "prePersist"     method= "prePersistHandler" />
+
+                <lifecycle-callback  type= "postUpdate"     method= "postUpdateHandler" /> 
+                <lifecycle-callback  type= "preUpdate"      method= "preUpdateHandler" />
+
+                <lifecycle-callback  type= "postRemove"     method= "postRemoveHandler" /> 
+                <lifecycle-callback  type= "preRemove"      method= "preRemoveHandler" /> 
+            </entity-listener>
+        </entity-listeners> 
+      
+    <id name="codfactura" type="string" column="codfactura" length="20"/>
+    
+    <many-to-one field="codproveedor" target-entity="Proveedores">
+      <join-columns>
+        <join-column name="codproveedor" referenced-column-name="codproveedor"/>
+      </join-columns>
+    </many-to-one>
+    
+    <one-to-many field="compra_articulos" target-entity="Factulineap" mapped-by="codfactura">
+    <cascade>
+                <cascade-all/>
+    </cascade>
+    </one-to-many>
+    
+    <field name="fecha" type="datetime" column="fecha" nullable="false"/>
+    <field name="iva" type="boolean" column="iva" nullable="true"/>
+    <field name="estado" type="string" column="estado" length="1" nullable="true"/>
+    <field name="totalfactura" type="float" column="totalfactura" precision="10" scale="0" nullable="false"/>
+    <field name="fechapago" type="date" column="fechapago" nullable="false"/>
+    <field name="borrado" type="string" column="borrado" length="1" nullable="true"/>
+  </entity>
+</doctrine-mapping>

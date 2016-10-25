@@ -1,0 +1,65 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+
+{% block content -%}
+    <h1>Proveedores list</h1>
+
+    <table class="table records_list">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Ruc</th>
+                <th>Direccion</th>
+                <th>Codprovincia</th>
+                <th>Ciudad</th>
+                
+                
+                <th>Telefono</th>
+                <th>Movil</th>
+                <th>Email</th>
+                <th>Codproveedor</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="#{{ path('proveedores_show', { 'id': entity.codproveedor }) }}">{{ entity.nombre }}</a></td>
+                <td>{{ entity.ruc }}</td>
+                <td>{{ entity.direccion }}</td>
+                <td>{{ entity.codprovincia }}</td>
+                <td>{{ entity.ciudad }}</td>
+                
+                
+                <td>{{ entity.telefono }}</td>
+                <td>{{ entity.movil }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.codproveedor }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="#{{ path('proveedores_show', { 'id': entity.codproveedor }) }}">mostrar</a>
+                    </li>
+                    <li>
+                        <a href="#{{ path('proveedores_edit', { 'id': entity.codproveedor }) }}">editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="#{{ path('proveedores_new') }}">
+                Crear nueva entrada
+            </a>
+        </li>
+    </ul>
+<script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+	};
+</script>
+{% endblock %}

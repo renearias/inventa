@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Factulineap list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Numlinea</th>
+                <th>Codfamilia</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Importe</th>
+                <th>Dcto</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('factulineap_show', { 'id': entity.id }) }}">{{ entity.numlinea }}</a></td>
+                <td>{{ entity.codfamilia }}</td>
+                <td>{{ entity.cantidad }}</td>
+                <td>{{ entity.precio }}</td>
+                <td>{{ entity.importe }}</td>
+                <td>{{ entity.dcto }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('factulineap_show', { 'id': entity.id }) }}">mostrar</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('factulineap_edit', { 'id': entity.id }) }}">editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('factulineap_new') }}">
+                Crear nuevo registro
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

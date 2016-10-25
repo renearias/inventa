@@ -1,0 +1,69 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+
+{% block content -%}
+    <h1>Solicitud de Compra</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Proveedor</th>
+                <td>{{ entity.codproveedor }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ entity.estado }}</td>
+            </tr>
+            <tr>
+                <th>Total Factura</th>
+                <td>{{ entity.totalfactura }}</td>
+            </tr>
+            <tr>
+                <th>Fecha de Pago</th>
+                <td>{{ entity.fechapago|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            
+            <tr>
+                <th>Articulos</th>
+                <td>
+                    <ul>
+                        
+                         {% for comprarticulo in entity.compraarticulos %}
+                                <li>{{ comprarticulo.codigo }} - {{ comprarticulo.cantidad }} - {{ comprarticulo.precio }}</li>
+                         {% endfor %} 
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+    <a href="{{ path('facturasp_print', { 'id': entity.codfactura }) }}">
+            Imprimir
+        </a>
+    </li>
+    <li>
+        <a href="#{{ path('facturasp') }}">
+            Regresar a la lista
+        </a>
+    </li>
+    
+    <li>
+        <a href="#{{ path('facturasp_edit', { 'id': entity.codfactura }) }}">
+            Editar
+        </a>
+         
+    </li>
+    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+</ul>
+<script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+	};
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Multiservices\InventarioBundle\Entity\Proveedores" table="proveedores">
+    <id name="codproveedor" type="integer" column="codproveedor">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="45" nullable="false"/>
+    <field name="ruc" type="string" column="ruc" length="13" nullable="false"/>
+    <field name="direccion" type="string" column="direccion" length="50" nullable="false"/>
+    <field name="codprovincia" type="integer" column="codprovincia" nullable="false"/>
+    <field name="ciudad" type="string" column="ciudad" length="35" nullable="false"/>
+    <field name="codentidad" type="integer" column="codentidad" nullable="true"/>
+    <field name="cuentabancaria" type="string" column="cuentabancaria" length="20" nullable="true"/>
+    <field name="codpostal" type="string" column="codpostal" length="5" nullable="true"/>
+    <field name="telefono" type="string" column="telefono" length="14" nullable="false"/>
+    <field name="movil" type="string" column="movil" length="14" nullable="false"/>
+    <field name="email" type="string" column="email" length="35" nullable="false"/>
+    <field name="web" type="string" column="web" length="45" nullable="true"/>
+    <field name="borrado" type="string" column="borrado" length="1" nullable="true"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,40 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+    <h1>Categorias lista</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td><a href="#{{ path('familias_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="#{{ path('familias_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="#{{ path('familias_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="#{{ path('familias_new') }}">
+                Crear nueva categoria
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

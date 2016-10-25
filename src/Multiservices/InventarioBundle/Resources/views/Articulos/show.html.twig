@@ -1,0 +1,68 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
+{% block content -%}
+    <h1>Articulos</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            
+            <tr>
+                <th>Codarticulo</th>
+                <td>{{ entity.codarticulo }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ entity.descripcion }}</td>
+            </tr>
+            
+            <tr>
+                <th>Stock</th>
+                <td>{{ entity.stock }}</td>
+            </tr>
+            
+            <tr>
+                <th>Fechaalta</th>
+                <td>{{ entity.fechaAlta|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Codembalaje</th>
+                <td>{{ entity.codembalaje }}</td>
+            </tr>
+            <tr>
+                <th>Unidadescaja</th>
+                <td>{{ entity.unidadesCaja }}</td>
+            </tr>
+            
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ entity.observaciones }}</td>
+            </tr>
+            
+            <tr>
+                <th>Imagen</th>
+                <td>{{ entity.imagen }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="#{{ path('articulos') }}">
+            Regresar a la Lista
+        </a>
+    </li>
+    <li>
+        <a href="#{{ path('articulos_edit', { 'id': entity.codarticulo }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+</ul>
+<script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script>
+<script type="text/javascript">
+	pageSetUp();
+	var pagefunction = function() {
+		//console.log("cleared");
+	};
+</script> 
+{% endblock %}

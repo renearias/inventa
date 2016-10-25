@@ -1,0 +1,9 @@
+services:
+  #multiservices.listener.pedidos:
+   # class: Multiservices\InventarioBundle\EventListener\PedidosListener
+   # arguments: [@service_container]
+  #  tags:
+   #   - { name: doctrine.event_listener, event: prePersist }
+#    multiservices_inventario.example:
+#        class: Multiservices\InventarioBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
