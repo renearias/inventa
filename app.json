@@ -1,0 +1,9 @@
+{
+   "name": "Inventa App",
+  "description": "INVENTA APP",
+  "buildpacks": [
+    {
+      "url": "heroku/php"
+    }
+  ]
+}
