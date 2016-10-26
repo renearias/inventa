@@ -1,5 +1,5 @@
 {
-   "name": "Inventa App",
+  "name": "Inventa App",
   "description": "INVENTA APP",
   "buildpacks": [
     {
