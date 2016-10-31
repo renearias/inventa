@@ -5,6 +5,7 @@ namespace Multiservices\InventarioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class FactulineapType extends AbstractType
 {
@@ -20,7 +21,7 @@ class FactulineapType extends AbstractType
            ->add('codigo',null,array('label' => 'Producto: '))
             ->add('cantidad')
             ->add('precio')
-            ->add('articulosdetail', 'collection', array('type' => new ArticulosDetalleType(),
+            ->add('articulosdetail', CollectionType::class, array('entry_type' => ArticulosDetalleType::class,
                                                          'allow_add'    => true,
                                                          'allow_delete' => true,
                                                          'by_reference' => false, 

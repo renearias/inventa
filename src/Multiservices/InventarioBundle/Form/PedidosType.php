@@ -5,6 +5,7 @@ namespace Multiservices\InventarioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class PedidosType extends AbstractType
 {
@@ -17,7 +18,7 @@ class PedidosType extends AbstractType
         $builder
             ->add('codfactura')
             ->add('codcliente',null,array('label' => 'Cliente: ',
-                                            'empty_value' => 'Seleccione un Cliente',
+                                            'placeholder' => 'Seleccione un Cliente',
                                            'attr' => array('class' => 'select2','required'=>'required')
                                           ))
             ->add('fecha')
@@ -26,7 +27,7 @@ class PedidosType extends AbstractType
             ->add('estado')
            // ->add('totalpedido')
            // ->add('borrado')
-           ->add('pedido_articulos', 'collection', array('type' => new PedidoslineaType(),
+           ->add('pedido_articulos', CollectionType::class, array('entry_type'  => PedidoslineaType::class,
                                                          'allow_add'    => true,
                                                          'allow_delete' => true,
                                                          'by_reference' => false, 

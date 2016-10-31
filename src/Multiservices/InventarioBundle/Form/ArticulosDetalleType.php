@@ -5,6 +5,7 @@ namespace Multiservices\InventarioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ArticulosDetalleType extends AbstractType
 {
@@ -18,13 +19,13 @@ class ArticulosDetalleType extends AbstractType
           ->add('codarticulo',null,array('label'=>'Tipo de Artículo '))
            ->add('codunico',null,array('label'=>'COD/MAC/SERIAL '))
            ->add('codfactulinea',null,array('label'=>'Factura(opcional) '))
-            ->add('estatus', 'choice', array(
+            ->add('estatus', ChoiceType::class, array(
                     'choices' => array('LIBRE' => 'LIBRE','OCUPADO' => 'OCUPADO'),
                     'expanded'  => true,
                     
                
                         ))
-            ->add('antiguedad', 'choice', array(
+            ->add('antiguedad', ChoiceType::class, array(
                     'choices' => array('NUEVO' => 'NUEVO','USADO' => 'USADO','DAÑADO' => 'DAÑADO'),
                     'expanded'  => true,
                         ))    

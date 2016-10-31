@@ -5,6 +5,7 @@ namespace Multiservices\InventarioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class FacturaspType extends AbstractType
 {
@@ -23,7 +24,7 @@ class FacturaspType extends AbstractType
           //  ->add('borrado')
             ->add('codfactura')
             ->add('codproveedor',null,array('label' => 'Proveedor: '))
-            ->add('compra_articulos', 'collection', array('type' => new FactulineapType(),
+            ->add('compra_articulos', CollectionType::class, array('entry_type' => FactulineapType::class,
                                                          'allow_add'    => true,
                                                          'allow_delete' => true,
                                                          'by_reference' => false, 
