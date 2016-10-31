@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Facturasp;
 use Multiservices\InventarioBundle\Form\FacturaspType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Facturasp controller.
@@ -89,12 +90,12 @@ class FacturaspController extends Controller
      */
     private function createCreateForm(Facturasp $entity)
     {
-        $form = $this->createForm(new FacturaspType(), $entity, array(
+        $form = $this->createForm(FacturaspType::class, $entity, array(
             'action' => $this->generateUrl('facturasp_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -204,12 +205,12 @@ class FacturaspController extends Controller
     */
     private function createEditForm(Facturasp $entity)
     {
-        $form = $this->createForm(new FacturaspType(), $entity, array(
+        $form = $this->createForm(FacturaspType::class, $entity, array(
             'action' => $this->generateUrl('facturasp_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -318,7 +319,7 @@ class FacturaspController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('facturasp_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

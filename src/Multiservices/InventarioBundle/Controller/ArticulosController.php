@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Articulos;
 use Multiservices\InventarioBundle\Form\ArticulosType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Articulos controller.
@@ -107,12 +108,12 @@ class ArticulosController extends Controller
      */
     private function createCreateForm(Articulos $entity)
     {
-        $form = $this->createForm(new ArticulosType(), $entity, array(
+        $form = $this->createForm(ArticulosType::class, $entity, array(
             'action' => $this->generateUrl('articulos_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -220,12 +221,12 @@ class ArticulosController extends Controller
     */
     private function createEditForm(Articulos $entity)
     {
-        $form = $this->createForm(new ArticulosType(), $entity, array(
+        $form = $this->createForm(ArticulosType::class, $entity, array(
             'action' => $this->generateUrl('articulos_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -300,7 +301,7 @@ class ArticulosController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('articulos_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

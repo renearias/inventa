@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Pedidos;
 use Multiservices\InventarioBundle\Form\PedidosType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Pedidos controller.
@@ -87,12 +88,12 @@ class PedidosController extends Controller
      */
     private function createCreateForm(Pedidos $entity)
     {
-        $form = $this->createForm(new PedidosType(), $entity, array(
+        $form = $this->createForm(PedidosType::class, $entity, array(
             'action' => $this->generateUrl('pedidos_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -176,12 +177,12 @@ class PedidosController extends Controller
     */
     private function createEditForm(Pedidos $entity)
     {
-        $form = $this->createForm(new PedidosType(), $entity, array(
+        $form = $this->createForm(PedidosType::class, $entity, array(
             'action' => $this->generateUrl('pedidos_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -256,7 +257,7 @@ class PedidosController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('pedidos_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

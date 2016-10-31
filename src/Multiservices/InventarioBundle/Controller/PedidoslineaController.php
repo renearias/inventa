@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Pedidoslinea;
 use Multiservices\InventarioBundle\Form\PedidoslineaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Pedidoslinea controller.
@@ -71,12 +72,12 @@ class PedidoslineaController extends Controller
      */
     private function createCreateForm(Pedidoslinea $entity)
     {
-        $form = $this->createForm(new PedidoslineaType(), $entity, array(
+        $form = $this->createForm(PedidoslineaType::class, $entity, array(
             'action' => $this->generateUrl('pedidoslinea_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -160,12 +161,12 @@ class PedidoslineaController extends Controller
     */
     private function createEditForm(Pedidoslinea $entity)
     {
-        $form = $this->createForm(new PedidoslineaType(), $entity, array(
+        $form = $this->createForm(PedidoslineaType::class, $entity, array(
             'action' => $this->generateUrl('pedidoslinea_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -240,7 +241,7 @@ class PedidoslineaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('pedidoslinea_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

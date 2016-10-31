@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Embalajes;
 use Multiservices\InventarioBundle\Form\EmbalajesType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Embalajes controller.
@@ -76,7 +77,7 @@ class EmbalajesController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -165,7 +166,7 @@ class EmbalajesController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -240,7 +241,7 @@ class EmbalajesController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('embalajes_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

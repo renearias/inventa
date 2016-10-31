@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\ArticulosDetalle;
 use Multiservices\InventarioBundle\Form\ArticulosDetalleType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * ArticulosDetalle controller.
@@ -110,7 +111,7 @@ class ArticulosDetalleController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -211,7 +212,7 @@ class ArticulosDetalleController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -286,7 +287,7 @@ class ArticulosDetalleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('articulosdetalle_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

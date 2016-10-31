@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Atributos;
 use Multiservices\InventarioBundle\Form\AtributosType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Atributos controller.

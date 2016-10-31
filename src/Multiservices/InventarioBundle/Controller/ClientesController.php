@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Clientes;
 use Multiservices\InventarioBundle\Form\ClientesType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Clientes controller.
@@ -71,12 +72,12 @@ class ClientesController extends Controller
      */
     private function createCreateForm(Clientes $entity)
     {
-        $form = $this->createForm(new ClientesType(), $entity, array(
+        $form = $this->createForm(ClientesType::class, $entity, array(
             'action' => $this->generateUrl('clientes_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -160,12 +161,12 @@ class ClientesController extends Controller
     */
     private function createEditForm(Clientes $entity)
     {
-        $form = $this->createForm(new ClientesType(), $entity, array(
+        $form = $this->createForm(ClientesType::class, $entity, array(
             'action' => $this->generateUrl('clientes_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -240,7 +241,7 @@ class ClientesController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('clientes_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

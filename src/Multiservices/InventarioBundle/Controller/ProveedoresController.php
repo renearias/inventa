@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Multiservices\InventarioBundle\Entity\Proveedores;
 use Multiservices\InventarioBundle\Form\ProveedoresType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Proveedores controller.
@@ -71,12 +72,12 @@ class ProveedoresController extends Controller
      */
     private function createCreateForm(Proveedores $entity)
     {
-        $form = $this->createForm(new ProveedoresType(), $entity, array(
+        $form = $this->createForm(ProveedoresType::class, $entity, array(
             'action' => $this->generateUrl('proveedores_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -160,12 +161,12 @@ class ProveedoresController extends Controller
     */
     private function createEditForm(Proveedores $entity)
     {
-        $form = $this->createForm(new ProveedoresType(), $entity, array(
+        $form = $this->createForm(ProveedoresType::class, $entity, array(
             'action' => $this->generateUrl('proveedores_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -240,7 +241,7 @@ class ProveedoresController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('proveedores_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }
