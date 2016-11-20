@@ -17,7 +17,7 @@ class Embalajes
     /**
      * @var string
      */
-    private $borrado;
+    private $borrado=0;
 
     /**
      * @var integer
