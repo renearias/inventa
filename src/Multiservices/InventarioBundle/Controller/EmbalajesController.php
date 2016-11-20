@@ -72,7 +72,7 @@ class EmbalajesController extends Controller
      */
     private function createCreateForm(Embalajes $entity)
     {
-        $form = $this->createForm(new EmbalajesType(), $entity, array(
+        $form = $this->createForm(EmbalajesType::class, $entity, array(
             'action' => $this->generateUrl('embalajes_create'),
             'method' => 'POST',
         ));
@@ -161,7 +161,7 @@ class EmbalajesController extends Controller
     */
     private function createEditForm(Embalajes $entity)
     {
-        $form = $this->createForm(new EmbalajesType(), $entity, array(
+        $form = $this->createForm(EmbalajesType::class, $entity, array(
             'action' => $this->generateUrl('embalajes_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
