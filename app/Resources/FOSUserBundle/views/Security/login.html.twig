@@ -72,15 +72,18 @@
 										        <input type="password"	id="password"	name="_password"/>
                                                                                        	<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>introduzca su contraseña</b> </label>
 										<div class="note">
-											<a href="forgotpassword.html">¿Cual es mi contraseña?</a>
+											<a href="{{path('fos_user_resetting_request')}}">¿Olvidó su contraseña?</a>
+										</div>
+										<div class="note">
+											<a href="{{path('fos_user_registration_register')}}">Registrar</a>
 										</div>
 									</section>
 
 									<section>
                                                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-										<label class="checkbox">
+										<!--<label class="checkbox">
 											<input type="checkbox" name="remember" checked="">
-											<i></i>Seguir conectado</label>
+											<i></i>Seguir conectado</label>-->
 									</section>
 								</fieldset>
 								<footer>

@@ -1,0 +1,114 @@
+{% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::base.html.twig' %}
+{% block title %}Contrato{% endblock %}
+{% block body %}        
+<div class="modal-header noprint">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+		&times;
+	</button>
+	<h4 class="modal-title" id="myModalLabel">Requerimiento de Pedidos</h4>
+        <div class="text-align-right">
+        <a id="imprimirmodal" class="btn btn-primary" onclick="window.print();">Imprimir</a>
+        </div>
+</div>
+<div class="modal-body">
+     <div class="row text-center"><img src="{{asset("logouniandes.png")}}" height="100"></div>
+
+<div class="row">
+   <table class="record_properties table">
+        <tbody>
+
+        <tr>
+                <th>Funcion</th>
+                <td>___________________________________</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Solicitante</th>
+                <td>{{ entity.codcliente }}</td>
+            </tr>
+            
+            <tr>
+                <th colspan="2" style="text-align: center">Pedido</th>
+            </tr>
+
+            <tr>
+                <th>Codpedido</th>
+                <td>{{ entity.codpedido }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Codcliente</th>
+                <td>{{ entity.codcliente }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ entity.estado }}</td>
+            </tr>
+            <tr>
+                <th>Totalpedido</th>
+                <td>{{ entity.totalpedido }}</td>
+            </tr>
+            
+            <tr>
+                <th>articulos</th>
+                <td>
+                    <ul>
+                         {% for pedidoarticulo in entity.pedidoarticulos %}
+                                <li>{{ pedidoarticulo.codigo }} - {{ pedidoarticulo.cantidad }}</li>
+                         {% endfor %} 
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<table style="width: 100%;text-align: center" class="text-center">
+    <tr>
+        <th style="width: 20%;text-align: center">Requerido Por</th>
+        <th style="width: 20%;text-align: center">Recibido Por</th>
+        <th style="width: 20%;text-align: center">Entregado Por</th>
+        <th style="width: 20%;text-align: center">Autorizado Por</th>
+        <th style="width: 20%;text-align: center">Jefe de Area</th>
+    </tr>
+    <tr style="height: 2cm">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>_________________</td>
+        <td>_________________</td>
+        <td>_________________</td>
+        <td>_________________</td>
+        <td>_________________</td>
+    </tr>
+    <tr>
+        <td>Nombres y apellidos</td>
+        <td>Nombres y apellidos</td>
+        <td>Nombres y apellidos</td>
+        <td>Nombres y apellidos</td>
+        <td>Nombres y apellidos</td>
+    </tr>
+</table>
+    
+      
+</div>
+
+
+    </div>
+
+
+<div class="modal-footer noprint">
+	<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:history.back(1)">
+		Cancelar
+	</button>
+    <a id="imprimirmodal" type="button" class="btn btn-primary" onclick="window.print()">Imprimir</a>
+</div>
+{% endblock %}              

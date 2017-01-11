@@ -75,6 +75,7 @@ class ClientesController extends Controller
         $form = $this->createForm(ClientesType::class, $entity, array(
             'action' => $this->generateUrl('clientes_create'),
             'method' => 'POST',
+            'autocomplete'=> 'off'
         ));
 
         $form->add('submit', SubmitType::class, array('label' => 'Create'));

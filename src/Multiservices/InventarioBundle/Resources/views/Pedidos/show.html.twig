@@ -39,6 +39,11 @@
     </table>
 
         <ul class="record_actions">
+        <li>
+    <a href="{{ path('pedidos_print', { 'id': entity.codpedido }) }}">
+            Imprimir
+        </a>
+    </li>
     <li>
         <a href="#{{ path('pedidos') }}">
             Regresar a la Lista

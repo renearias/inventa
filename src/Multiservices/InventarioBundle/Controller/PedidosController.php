@@ -261,4 +261,29 @@ class PedidosController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Finds and displays a Pedidos entity.
+     *
+     * @Route("/{id}/print", name="pedidos_print")
+     * @Method("GET")
+     * @Template()
+     */
+    public function printAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('MultiservicesInventarioBundle:Pedidos')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Pedidos entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
 }

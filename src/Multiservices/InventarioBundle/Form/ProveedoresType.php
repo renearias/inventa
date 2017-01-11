@@ -5,6 +5,12 @@ namespace Multiservices\InventarioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+
 
 class ProveedoresType extends AbstractType
 {
@@ -15,17 +21,17 @@ class ProveedoresType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('ruc')
-            ->add('direccion')
-            ->add('codprovincia')
-            ->add('ciudad')
+            ->add('nombre' ,TextType::class, array('attr' => array('autocomplete' => 'off')))
+            ->add('ruc', TextType::class)
+            ->add('direccion' ,TextType::class, array('attr' => array('autocomplete' => 'off')))
+            ->add('codprovincia',TextType::class, array('attr' => array('autocomplete' => 'off')))
+            ->add('ciudad' ,TextType::class, array('attr' => array('autocomplete' => 'off')))
           //  ->add('codentidad')
            // ->add('cuentabancaria')
            // ->add('codpostal')
-            ->add('telefono')
-            ->add('movil')
-            ->add('email')
+            ->add('telefono', NumberType::class,  array('attr' => array('required' => 'required')))
+            ->add('movil', NumberType::class)
+            ->add('email', EmailType::class)
            // ->add('web')
           //  ->add('borrado')
         ;
@@ -37,7 +43,8 @@ class ProveedoresType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Multiservices\InventarioBundle\Entity\Proveedores'
+            'data_class' => 'Multiservices\InventarioBundle\Entity\Proveedores',
+            'attr' => array('autocomplete' => 'off'),
         ));
     }
 
