@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">  	
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="description" content="Login Multiacademico">
+	<meta name="author" content="Rene Arias">
+        {#<link rel="shortcut icon" href="{{entidad.logoUrl}}"> #}
+    <link href="{{asset('css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
+    <link href="{{asset('css/animate-custom.css')}}" type="text/css"  rel="stylesheet"> 
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+     <title>Ingreso al sistema {{'UNIANDES'}}</title>
+      
+  </head>
+    <body class="fade-in" {% block OnLoad-%}{%endblock OnLoad%}>
+        
+        
+    	 <script type="text/javascript">
+            window.moveTo(0,0);
+            window.resizeTo(screen.width, screen.height);
+         </script>
+    	<!-- start Login box -->
+    	<div class="container" id="login-block">
+                {% block content %}
+    		 <!-- content -->
+                 {% endblock content %}                       
+    	</div>
+     	{#<footer class="container">
+            <p id="footer-text"><small>Copyright &copy; 2015 <a href="https://www.arxis.la">Arxis Latinoamérica.</a></small></p>
+     	</footer>#}
+</body>
+</html>
