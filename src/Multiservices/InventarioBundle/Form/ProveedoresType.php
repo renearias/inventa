@@ -18,7 +18,7 @@ class ProveedoresType extends AbstractType
             ->add('nombre')
             ->add('ruc')
             ->add('direccion')
-            ->add('codprovincia')
+            ->add('codprovincia',null,['choices'=>[9=>'Guayas', 12=>'Los Rios']])
             ->add('ciudad')
           //  ->add('codentidad')
            // ->add('cuentabancaria')
