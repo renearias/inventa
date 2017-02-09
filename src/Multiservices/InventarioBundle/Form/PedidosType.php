@@ -16,7 +16,7 @@ class PedidosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('codfactura')
+            ->add('codfactura', null, array('attr' => array('autocomplete' => 'off')))
             ->add('codcliente',null,array('label' => 'Cliente: ',
                                             'placeholder' => 'Seleccione un Cliente',
                                            'attr' => array('class' => 'select2','required'=>'required')
