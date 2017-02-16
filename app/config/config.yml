@@ -65,26 +65,39 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    default_mailer: mailgun_mailer
+    mailers:
+        normal_mailer:
+            host:      "%mailer_host%"
+            username:  "%mailer_user%"
+            password:  "%mailer_password%"
+            port: "%mailer_port%"
+            encryption: "%mailer_encryption%"
+            auth_mode:	login
+            spool:     { type: memory }
+        mailgun_mailer:
+            transport: mailgun
+            spool:     { type: memory }
 
 fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\Usuario
     from_email:
-        address:       abnersaavedra777@gmail.com
+        address:       info@inventafranklin.com
         sender_name:    Univesidad Uniandes
     resetting:
         email:
             from_email:
-                address:        info@multiacademico.com
-                sender_name:    Inventa App
+                address:        info@inventafranklin.com
+                sender_name:    Univesidad Uniandes
     registration:
         confirmation:
             enabled: true
         form:
           type: app_user_registration
+cspoo_swiftmailer_mailgun:
+    key: "%mailgun_key%"
+    
+    domain: "appd260f90f0b4743eeb4ae6f8dbeb22c9b.mailgun.org"
+    http_client: 'httplug.client'
