@@ -99,5 +99,5 @@ fos_user:
 cspoo_swiftmailer_mailgun:
     key: "%mailgun_key%"
     
-    domain: "appd260f90f0b4743eeb4ae6f8dbeb22c9b.mailgun.org"
+    domain: "franklinangamarca.com"
     http_client: 'httplug.client'
