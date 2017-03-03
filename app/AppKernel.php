@@ -17,6 +17,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
+            new cspoo\Swiftmailer\MailgunBundle\cspooSwiftmailerMailgunBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             //new Multiservices\IspControlBundle\MultiservicesIspControlBundle(),
             new Multiservices\InventarioBundle\MultiservicesInventarioBundle(),
