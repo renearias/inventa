@@ -5,6 +5,11 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    public function init() {
+        // Change timezone
+        date_default_timezone_set('America/Guayaquil');
+        parent::init();
+    }
     public function registerBundles()
     {
         $bundles = array(
@@ -34,7 +39,7 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
-    public function getRootDir()
+     public function getRootDir()
     {
         return __DIR__;
     }
