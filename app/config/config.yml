@@ -65,7 +65,11 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-
+cspoo_swiftmailer_mailgun:
+    key: "%mailgun_key%"
+    
+    domain: "franklinangamarca.com"
+    http_client: 'httplug.client'
 # Swiftmailer Configuration
 swiftmailer:
     default_mailer: mailgun_mailer
@@ -99,8 +103,3 @@ fos_user:
             enabled: true
         form:
           type: app_user_registration
-cspoo_swiftmailer_mailgun:
-    key: "%mailgun_key%"
-    
-    domain: "franklinangamarca.com"
-    http_client: 'httplug.client'
