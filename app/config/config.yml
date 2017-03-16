@@ -84,12 +84,12 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\Usuario
     from_email:
-        address:       postmaster@franklinangamarca.com
+        address:       info@franklinangamarca.com
         sender_name:    Univesidad Uniandes
     resetting:
         email:
             from_email:
-                address:        postmaster@franklinangamarca.com
+                address:        info@franklinangamarca.com
                 sender_name:    Univesidad Uniandes
     registration:
         confirmation:
