@@ -885,12 +885,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "a2e1305135a012ab37d978bb6f222e012d85b940"
+                "reference": "4a6415b1254db6e8ea0886ead5c35888c02ccaf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/a2e1305135a012ab37d978bb6f222e012d85b940",
-                "reference": "a2e1305135a012ab37d978bb6f222e012d85b940",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/4a6415b1254db6e8ea0886ead5c35888c02ccaf9",
+                "reference": "4a6415b1254db6e8ea0886ead5c35888c02ccaf9",
                 "shasum": ""
             },
             "require": {
@@ -954,7 +954,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2017-03-03 08:29:49"
+            "time": "2017-03-09 15:14:58"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1245,16 +1245,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.22.0",
+            "version": "1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "bad29cb8d18ab0315e6c477751418a82c850d558"
+                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bad29cb8d18ab0315e6c477751418a82c850d558",
-                "reference": "bad29cb8d18ab0315e6c477751418a82c850d558",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1e044bc4b34e91743943479f1be7a1d5eb93add0",
+                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0",
                 "shasum": ""
             },
             "require": {
@@ -1319,20 +1319,20 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-11-26T00:15:39+00:00"
+            "time": "2017-03-13T07:08:03+00:00"
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.9",
+            "version": "v2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "6968531206671f94377b01dc7888d5d1b858a01b"
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/6968531206671f94377b01dc7888d5d1b858a01b",
-                "reference": "6968531206671f94377b01dc7888d5d1b858a01b",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
                 "shasum": ""
             },
             "require": {
@@ -1367,7 +1367,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-03-03T20:43:42+00:00"
+            "time": "2017-03-13T16:27:32+00:00"
         },
         {
             "name": "php-http/cache-plugin",
@@ -2344,16 +2344,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v4.0.1",
+            "version": "v4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "f2ce0035fc512287978510ca1740cd111d60f89f"
+                "reference": "56bded66985e22f6eac2cf86735fd21c625bff2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/f2ce0035fc512287978510ca1740cd111d60f89f",
-                "reference": "f2ce0035fc512287978510ca1740cd111d60f89f",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/56bded66985e22f6eac2cf86735fd21c625bff2f",
+                "reference": "56bded66985e22f6eac2cf86735fd21c625bff2f",
                 "shasum": ""
             },
             "require": {
@@ -2384,7 +2384,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2017-02-18T17:53:25+00:00"
+            "time": "2017-03-09T17:33:20+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3270,20 +3270,23 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v2.8.17",
+            "version": "v2.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "6b9436c6f6fc474335871bb9c90743606d967806"
+                "reference": "bc240bf630ea49d5f86cef746254d64299029932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/6b9436c6f6fc474335871bb9c90743606d967806",
-                "reference": "6b9436c6f6fc474335871bb9c90743606d967806",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/bc240bf630ea49d5f86cef746254d64299029932",
+                "reference": "bc240bf630ea49d5f86cef746254d64299029932",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "conflict": {
+                "phpunit/phpunit": ">=6.0"
             },
             "suggest": {
                 "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
@@ -3321,7 +3324,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-01-21T16:40:50+00:00"
+            "time": "2017-03-01T19:11:57+00:00"
         }
     ],
     "aliases": [],
