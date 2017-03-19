@@ -71,9 +71,12 @@
 										<label class="input"> <i class="icon-append fa fa-lock"></i>
 										        <input type="password"	id="password"	name="_password"/>
                                                                                        	<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>introduzca su contraseña</b> </label>
-										<div class="note">
+                                                                                 {% if error %}
+                                                                                <div class="note">
 											<a href="{{path('fos_user_resetting_request')}}">¿Cual es mi contraseña?</a>
 										</div>
+                                                                                {% endif %}        
+										
 									</section>
 
 									<section>

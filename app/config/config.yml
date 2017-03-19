@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -101,5 +102,11 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+        #form:
+        #  type: app_user_registration
+    profile:
         form:
-          type: app_user_registration
+            type:  AppBundle\Form\ProfileFormType
+            #handler:            fos_user.profile.form.handler.default
+            #name:               fos_user_profile_form
+            #validation_groups:  [Profile, Default]      

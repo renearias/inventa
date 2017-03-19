@@ -1,0 +1,7 @@
+services:
+    app.form.profile:
+        class: AppBundle\Form\ProfileFormType
+        tags:
+            - { name: form.type, alias: app_user_profile }
+    app_user_profile:
+        alias: app.form.profile
