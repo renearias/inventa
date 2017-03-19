@@ -24,16 +24,16 @@
                 <td>{{ entity.codproveedor }}</td>
                 <td>{{ entity.estado }}</td>
                 <td>{{ entity.totalfactura|number_format(2, '.', ',') }}</td>
-                <td>{% if entity.fechapago %}{{ entity.fechapago|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechapago %}{{ entity.fechapago|date('Y-m-d') }}{% endif %}</td>
                 
                 <td>
                 <ul>
                     <li>
                         <a href="#{{ path('facturasp_show', { 'id': entity.codfactura }) }}">mostrar</a>
                     </li>
-                    <li>
+                    {#<li>
                         <a href="#{{ path('facturasp_edit', { 'id': entity.codfactura }) }}">editar</a>
-                    </li>
+                    </li>#}
                 </ul>
                 </td>
             </tr>
