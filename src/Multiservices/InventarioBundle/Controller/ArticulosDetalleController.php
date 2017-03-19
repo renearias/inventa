@@ -212,7 +212,7 @@ class ArticulosDetalleController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', SubmitType::class, array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Actualizar'));
 
         return $form;
     }
@@ -287,7 +287,7 @@ class ArticulosDetalleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('articulosdetalle_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Eliminar'))
             ->getForm()
         ;
     }

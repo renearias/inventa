@@ -182,7 +182,7 @@ class PedidosController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', SubmitType::class, array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Actualizar'));
 
         return $form;
     }
@@ -257,7 +257,7 @@ class PedidosController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('pedidos_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Eliminar'))
             ->getForm()
         ;
     }
