@@ -10,7 +10,7 @@
             </tr>
             <tr>
                 <th>Fecha</th>
-                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.fecha|date('Y-m-d H:i') }}</td>
             </tr>
             <tr>
                 <th>Codcliente</th>
@@ -30,7 +30,7 @@
                 <td>
                     <ul>
                          {% for pedidoarticulo in entity.pedidoarticulos %}
-                                <li>{{ pedidoarticulo.codigo }} - {{ pedidoarticulo.cantidad }}</li>
+                                <li>{{ pedidoarticulo.codigo }} / {{ pedidoarticulo.cantidad }}</li>
                          {% endfor %} 
                     </ul>
                 </td>
