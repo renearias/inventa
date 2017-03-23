@@ -5,7 +5,6 @@
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nombre</th>
                 <th>Actions</th>
             </tr>
@@ -13,7 +12,6 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.id }}</td>
                 <td><a href="#{{ path('familias_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
                 <td>
                 <ul>

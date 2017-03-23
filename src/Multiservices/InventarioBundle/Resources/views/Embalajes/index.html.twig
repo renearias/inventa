@@ -6,7 +6,6 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Codembalaje</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,14 +14,10 @@
             <tr>
                 <td><a href="#{{ path('embalajes_show', { 'id': entity.codembalaje }) }}">{{ entity.nombre }}</a></td>
                 
-                <td>{{ entity.codembalaje }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="#{{ path('embalajes_show', { 'id': entity.codembalaje }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="#{{ path('embalajes_edit', { 'id': entity.codembalaje }) }}">edit</a>
+                        <a href="#{{ path('embalajes_show', { 'id': entity.codembalaje }) }}">mostrar</a>
                     </li>
                 </ul>
                 </td>
