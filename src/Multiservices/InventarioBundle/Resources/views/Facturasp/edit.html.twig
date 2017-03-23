@@ -121,7 +121,7 @@
             Regresar a la lista
         </a>
     </li>
-    <li>{{ form_start(delete_form) }}{{ form_row(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
+    <li>{{ form_start(delete_form) }}{{ form_widget(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
 </ul>
 {% endblock %}
 {% block ajax_scripts %}
