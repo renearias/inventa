@@ -235,8 +235,8 @@
                                     foottitle['total']=parseTotal;
                                     $("#jqgrid").jqGrid('footerData', 'set', foottitle);
                                     
-                                    var parseIva=parseTotal*0.12;
-                                    var parseTotalConIva=parseTotal*1.12;
+                                    var parseIva=parseTotal*0.14;
+                                    var parseTotalConIva=parseTotal*1.14;
                                     
                                     var $footRow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
                                     .next(".ui-jqgrid-sdiv")
@@ -270,7 +270,7 @@
                                     }
                                     
                                     $FooterIVARow.find(">td[aria-describedby=\"" + $jqgrid.attr("id") + "_"+nomprecio+"\"]")
-                                        .html("<b>IVA 12%:</b>"); 
+                                        .html("<b>IVA 14%:</b>"); 
                                     $FooterIVARow.find(">td[aria-describedby=" + $jqgrid.attr("id") + "_total]")
                                         .html("<b>"+$.fmatter.util.NumberFormat(parseIva, $.jgrid.formatter.number)+"</b>");
                                     $newFooterRow.find(">td[aria-describedby=\"" + $jqgrid.attr("id") + "_"+nomprecio+"\"]")
