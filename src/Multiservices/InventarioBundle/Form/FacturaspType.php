@@ -23,7 +23,10 @@ class FacturaspType extends AbstractType
             ->add('fechapago')
           //  ->add('borrado')
             ->add('codfactura')
-            ->add('codproveedor',null,array('label' => 'Proveedor: '))
+            ->add('codproveedor',null,array('label' => 'Proveedor: ',
+                                            
+                                            'placeholder'=>'Seleccione Proovedor',
+                                            'required'=>true))
             ->add('compra_articulos', CollectionType::class, array('entry_type' => FactulineapType::class,
                                                          'allow_add'    => true,
                                                          'allow_delete' => true,
