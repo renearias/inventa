@@ -130,6 +130,10 @@
 				toolbarfilter: true,
 				viewrecords : true,
 				sortorder : "asc",
+                                afterInsertRow: function(){
+                                    $("#jqgrid_iladd").hide();
+                                }
+                                ,
 				gridComplete: function(){
 					var ids = $("#jqgrid").jqGrid('getDataIDs');
 					for(var i=0;i < ids.length;i++){
