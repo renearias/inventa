@@ -27,7 +27,7 @@ class Proveedores
     /**
      * @var integer
      */
-    private $codprovincia;
+    private $codprovincia=0;
 
     /**
      * @var string

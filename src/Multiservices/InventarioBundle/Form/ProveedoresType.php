@@ -23,22 +23,32 @@ class ProveedoresType extends AbstractType
     {
         $builder
             ->add('nombre' ,TextType::class, array('attr' => array('autocomplete' => 'off')))
-            ->add('ruc', TextType::class)
+            ->add('ruc', TextType::class, array('attr'=>[
+                'maxlength'=>13
+            ]))
             ->add('direccion' ,TextType::class, array('attr' => array('autocomplete' => 'off')))
             //->add('codprovincia',TextType::class, array('attr' => array('autocomplete' => 'off')))
             ->add('ciudad' ,ChoiceType::class, array('choices'=>[
-                                                              'Babahoyo'=>'Babahoyo',
-                                                              'Guayaquil'=>'Guayaquil',
-                                                              'Quevedo'=>'Quevedo',
-                                                              'Ambato'=>'Ambato'
+                                                                'Ambato'=>'Ambato',
+                                                                'Tulcan'=>'Tulcan',
+                                                                'Ibarra'=>'Ibarra',
+                                                                'Riobamba'=>'Riobamba',
+                                                                'Puyo'=>'Puyo',
+                                                                'Santo Domingo'=>'Santo Domingo',
+                                                                'Quevedo'=>'Quevedo',
+                                                                'Babahoyo'=>'Babahoyo',
+                                                                'Guayaquil'=>'Guayaquil'
                                                     ],
                                                     'attr' => array('autocomplete' => 'off'
                                                         )))
           //  ->add('codentidad')
            // ->add('cuentabancaria')
            // ->add('codpostal')
-            ->add('telefono', NumberType::class,  array('attr' => array('required' => 'required')))
-            ->add('movil', NumberType::class)
+            ->add('telefono', NumberType::class,  array('attr' => array('required' => 'required',
+                                                                        'maxlength'=>9)))
+            ->add('movil', NumberType::class, array('attr'=>[
+                'maxlength'=>10
+            ]))
             ->add('email', EmailType::class)
            // ->add('web')
           //  ->add('borrado')
