@@ -19,7 +19,7 @@ class ArticulosType extends AbstractType
             ->add('codfamilia',null,array('label'=>'Categoria'))
          //   ->add('referencia')
           // ->add('descripcionCorta',null,array('label'=>'Descripcion Corta'))     
-           ->add('descripcion',null,array('label'=>'Descripcion'))     
+           ->add('descripcion',null,array('label'=>'Producto'))     
           //  ->add('impuesto')
            // ->add('codproveedor1',null,array('label'=>'Proveedor 1'))     
            // ->add('codproveedor2',null,array('label'=>'Proveedor 2'))     
