@@ -9,10 +9,6 @@
                 <td>{{ entity.nombre }}</td>
             </tr>
             
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
         </tbody>
     </table>
 
@@ -27,8 +23,8 @@
             Editar
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
+    {{ form_start(delete_form) }}{{ form_widget(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}
     <script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
 <script type="text/javascript">
 	pageSetUp();

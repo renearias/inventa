@@ -11,8 +11,8 @@
             Regresar a la Lista
         </a>
     </li>
-    <li>{{ form_start(delete_form) }}{{ form_widget(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
 </ul>
+    {{ form_start(delete_form) }}{{ form_widget(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}
 <script type="text/javascript" src="{{ asset('js/arxis-postforms.js')}}"></script> 
 <script type="text/javascript">
 	pageSetUp();
