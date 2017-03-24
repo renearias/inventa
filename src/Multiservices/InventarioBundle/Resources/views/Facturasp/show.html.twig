@@ -1,3 +1,4 @@
+
 {% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
 
 {% block content -%}
@@ -7,7 +8,7 @@
         <tbody>
             <tr>
                 <th>Fecha</th>
-                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.fecha|date('Y-m-d H:i') }}</td>
             </tr>
             <tr>
                 <th>Proveedor</th>
@@ -23,7 +24,7 @@
             </tr>
             <tr>
                 <th>Fecha de Pago</th>
-                <td>{{ entity.fechapago|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.fechapago|date('Y-m-d H:i') }}</td>
             </tr>
             
             <tr>
