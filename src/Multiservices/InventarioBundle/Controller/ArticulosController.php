@@ -89,7 +89,7 @@ class ArticulosController extends Controller
             $entity->setBorrado(0);
             $em->persist($entity);
             $em->flush();
-
+            
             return $this->redirect($this->generateUrl('articulos_show', array('id' => $entity->getId())));
         }
 
@@ -281,9 +281,14 @@ class ArticulosController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Articulos entity.');
             }
-
+            
+            try{
             $em->remove($entity);
             $em->flush();
+            }catch(\Exception $e){
+                return new Response("Hay componentes relacionados con este registro, no se puede eliminar");
+            }
+            
         }
 
         return $this->redirect($this->generateUrl('articulos'));

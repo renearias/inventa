@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class PedidosType extends AbstractType
 {
@@ -24,7 +25,10 @@ class PedidosType extends AbstractType
             ->add('fecha')
             //->add('iva')
             
-            ->add('estado')
+            ->add('estado', ChoiceType::class, ['choices'=>[
+                                                        0=>'Creado',
+                                                        1=>'Completo'
+            ]])
            // ->add('totalpedido')
            // ->add('borrado')
            ->add('pedido_articulos', CollectionType::class, array('entry_type'  => PedidoslineaType::class,
