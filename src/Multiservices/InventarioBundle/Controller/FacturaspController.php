@@ -72,7 +72,7 @@ class FacturaspController extends Controller
             return $this->redirect($this->generateUrl('facturasp_show', array('id' => $entity->getId())));
         }else
         {
-            echo "algo no funka";
+            echo "Ocurrio un Error";
         }
 
         return array(

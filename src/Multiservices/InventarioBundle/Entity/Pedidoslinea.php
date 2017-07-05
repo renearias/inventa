@@ -1,11 +1,14 @@
 <?php
 
 namespace Multiservices\InventarioBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Multiservices\InventarioBundle\Entity\Articulos;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Pedidoslinea
+ * 
  */
 class Pedidoslinea
 {
@@ -19,7 +22,7 @@ class Pedidoslinea
     private $codfamilia;
 
     /**
-     * @var string
+     * @var Articulos
      */
     private $codigo;
 
@@ -87,10 +90,10 @@ class Pedidoslinea
     /**
      * Set codigo
      *
-     * @param string $codigo
+     * @param Articulos $codigo
      * @return Pedidoslinea
      */
-    public function setCodigo($codigo)
+    public function setCodigo(Articulos $codigo)
     {
         $this->codigo = $codigo;
 
@@ -100,7 +103,7 @@ class Pedidoslinea
     /**
      * Get codigo
      *
-     * @return string 
+     * @return Articulos
      */
     public function getCodigo()
     {

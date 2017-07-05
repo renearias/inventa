@@ -1,5 +1,9 @@
 {% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
 {% block content -%}
+    {% for articulo in edit_form.pedido_articulos %}
+         {{form_errors(articulo.codigo)}}
+         {{form_errors(articulo.cantidad)}}
+      {%endfor%}
      <script type="text/javascript">
 
     

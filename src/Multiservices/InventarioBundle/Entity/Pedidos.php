@@ -4,6 +4,9 @@ namespace Multiservices\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+use Multiservices\InventarioBundle\Validator\Constraints\InventoryChecker;
+
 /**
  * Pedidos
  */
@@ -48,7 +51,14 @@ class Pedidos
      * @var integer
      */
     private $codpedido;
-
+    
+    /**
+     *   @Assert\Count(
+     *      min = 1,
+     *      minMessage = "Se debe agregar al menos un producto"
+     * )
+     * @InventoryChecker
+     */
     private $pedido_articulos;
     
     public function __construct()

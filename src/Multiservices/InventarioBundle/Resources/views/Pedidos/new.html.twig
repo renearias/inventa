@@ -1,5 +1,9 @@
 {% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
 {% block content -%}
+     {% for articulo in form.pedido_articulos %}
+         {{form_errors(articulo.codigo)}}
+         {{form_errors(articulo.cantidad)}}
+      {%endfor%}
   <script type="text/javascript">
 
     
@@ -149,7 +153,7 @@
 				editurl : "{{asset("dummy.html")}}",
 				caption : "Articulos",
 				multiselect : true,
-				autowidth : true,
+				autowidth : true
 
 				});
 				$("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
