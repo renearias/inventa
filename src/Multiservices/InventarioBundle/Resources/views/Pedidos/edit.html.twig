@@ -1,8 +1,96 @@
 {% extends app.request.isXmlHttpRequest ? '::baseajax.html.twig' : '::basesmartpanel.html.twig' %}
 {% block content -%}
+     <script type="text/javascript">
+
+    
+    var protocodigo=$("<div/>").html("{{form_widget(edit_form.pedido_articulos.vars.prototype.codigo)|e('html_attr')}}").text();
+    var protocantidad=$("<div/>").html("{{form_widget(edit_form.pedido_articulos.vars.prototype.cantidad)|e('html_attr')}}").text();
+    
+       //var protocodigo="";
+      var articulos=$(protocodigo);
+     
+      var listarticulos=$(articulos).find("option").map(function() {
+                            var opt  = {};
+                            opt = '"'+$(this).val()+'":"'+$(this).text()+'"';
+                            return opt;
+                            }).get();
+      // var stringarticulos=listarticulos.join(";");
+       var stringarticulos=$.parseJSON( '{ '+listarticulos.join(",")+' }' );;
+        var formname="{{edit_form.vars.name}}";
+        var nomcantidad=formname+"[pedido_articulos][__name__][cantidad]";
+        var nomproducto=formname+"[pedido_articulos][__name__][codigo]";
+        
+        
+        var dataproto=[];
+        var subjqgrid_data=[];
+        {% for articulo in edit_form.pedido_articulos.vars.data %}
+        dataproto['{{loop.index0}}']={};
+        dataproto['{{loop.index0}}']["id"]="{{articulo.getId()}}";
+        dataproto['{{loop.index0}}'][nomproducto]="{{articulo.codigo.getId()}}";
+        dataproto['{{loop.index0}}'][nomcantidad]="{{articulo.cantidad}}";
+        {#dataproto['{{loop.index0}}'][nomprecio]="{{articulo.precio}}";
+        dataproto['{{loop.index0}}']['total']=dataproto['{{loop.index0}}'][nomprecio]*dataproto['{{loop.index0}}'][nomcantidad];#}
+        subjqgrid_data['{{articulo.getId()}}']=[];
+                     {#{% for detalle in edit_form.pedido_articulos.vars.data[loop.index0].articulosdetail %}
+                     
+                     subjqgrid_data['{{articulo.getId()}}']['{{loop.index0}}']={};
+                     subjqgrid_data['{{articulo.getId()}}']['{{loop.index0}}'][nomdetallemac]="{{detalle.codunico}}";
+                     subjqgrid_data['{{articulo.getId()}}']['{{loop.index0}}'][nomdetalleestatus]="{{detalle.estatus}}";
+                     subjqgrid_data['{{articulo.getId()}}']['{{loop.index0}}'][nomdetalleantiguedad]="{{detalle.antiguedad}}";
+                     console.log(subjqgrid_data['{{articulo.getId()}}']);   
+                   {%endfor%}#}
+        {%endfor%}
+        
+      </script>
     <h1>Pedidos editar</h1>
 
-    {{ form(edit_form) }}
+    {#{{ form_start(edit_form) }}
+    
+    {{ form_end(edit_form) }}#}
+    <div class="table">
+    {{ form_start(edit_form, {'method': 'POST'}) }}
+    {{ form_errors(edit_form) }}
+    
+    
+     {{ form_row(edit_form.fecha) }}
+     {{ form_row(edit_form.codcliente) }}
+    <!--
+	The ID "widget-grid" will start to initialize all widgets below 
+	You do not need to use widgets if you dont want to. Simply remove 
+	the <section></section> and you can use wells or panels instead 
+	-->
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+	<!-- row -->
+	<div class="row">
+		
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				
+				
+				<table id="jqgrid"></table>
+				<div id="pjqgrid"></div>
+				
+				<br>
+				<!--<a href="javascript:void(0)" id="m1">Get Selected id's</a><br>
+				<a href="javascript:void(0)" id="m1s">Select(Unselect) row 13</a>
+                                -->    
+		</article>
+		<!-- WIDGET END -->
+		
+	</div>
+
+	<!-- end row -->
+
+</section>
+<!-- end widget grid -->
+        
+{{ form_row(edit_form._token) }}
+     {{ form_row(edit_form.submit, { 'label': 'Guardar' }) }}
+  
+   </div>
 
         <ul class="record_actions">
     <li>
@@ -12,15 +100,148 @@
     </li>
     <li>{{ form_start(delete_form) }}{{ form_widget(delete_form.submit, { 'label': 'Eliminar'}) }}{{ form_end(delete_form) }}</li>
 </ul>
- <script type="text/javascript">
-
+{% endblock %}
+{% block ajax_scripts %}            
+<script type="text/javascript">
+    
 	pageSetUp();
 	var pagefunction = function() {
-		//console.log("cleared");
-	};
-$(function() {  
-        loadScript("{{asset('js/arxis-postforms.js')}}",pagefunction);
-        });
+            
+            $(".select2-container").width("240px");
+                
+		loadScript("{{asset("js/plugin/jqgrid/jquery.jqGrid.min_1.js")}}", run_jqgrid_function);
+                
+		function run_jqgrid_function() {
 
+                loadScript("{{asset("js/plugin/jqgrid/grid.postext.js")}}");
+			$("#jqgrid").jqGrid({
+				data : dataproto,
+				datatype : "local",
+				height : 'auto',
+				colNames : ['Actions','Producto', 'Cantidad'],
+				colModel : [
+					{ name : 'act', index:'act', sortable:false }, 
+					//{ name : 'id', index : 'id' },
+					{ name : nomproducto, index : nomproducto, editable : true, edittype:"select",formatter:'select',editoptions:{class:"",value:stringarticulos}},
+					{ name : nomcantidad, index : nomcantidad, editable : true } 
+                                        
+					//{ name : 'amount', index : 'amount', align : "right", editable : true }, 
+					//{ name : 'tax', index : 'tax', align : "right", editable : true }, 
+					//{ name : 'total', index : 'total', align : "right", editable : true }, 
+					//{ name : 'note', index : 'note', sortable : false, editable : true }
+                                        ],
+				rowNum : 10,
+				rowList : [10, 20, 30],
+				pager : '#pjqgrid',
+				sortname : 'id',
+				toolbarfilter: true,
+				viewrecords : true,
+				sortorder : "asc",
+                                afterInsertRow: function(){
+                                    $("#jqgrid_iladd").hide();
+                                }
+                                ,
+				gridComplete: function(){
+					var ids = $("#jqgrid").jqGrid('getDataIDs');
+					for(var i=0;i < ids.length;i++){
+						var cl = ids[i];
+						be = "<button class='btn btn-xs btn-default' type='button' data-original-title='Editar Row' onclick=\"$('#jqgrid').editRow('"+cl+"');\"><i class='fa fa-pencil'></i></button>"; 
+						se = "<button class='btn btn-xs btn-default' type='button' data-original-title='Save Row' onclick=\"$('#jqgrid').saveRow('"+cl+"');\"><i class='fa fa-save'></i></button>";
+						ca = "<button class='btn btn-xs btn-default' type='button' data-original-title='Cancel' onclick=\"$('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>";  
+						//ce = "<button class='btn btn-xs btn-default' onclick=\"$('#jqgrid').restoreRow('"+cl+"');\"><i class='fa fa-times'></i></button>"; 
+						//$("#jqgrid").jqGrid('setRowData',ids[i],{act:be+se+ce});
+						$("#jqgrid").jqGrid('setRowData',ids[i],{act:be+se+ca});
+					}	
+				},
+				editurl : "{{asset("dummy.html")}}",
+				caption : "Articulos",
+				multiselect : true,
+				autowidth : true,
+
+				});
+				$("#jqgrid").jqGrid('navGrid', "#pjqgrid", {
+					edit : false,
+					add : false,
+					del : true
+				});
+				$("#jqgrid").jqGrid('inlineNav', "#pjqgrid");
+				/* Add tooltips */
+				$('.navtable .ui-pg-button').tooltip({
+					container : 'body'
+				});
+				// remove classes
+				$(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+			    $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+			    $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+			    $(".ui-jqgrid-pager").removeClass("ui-state-default");
+			    $(".ui-jqgrid").removeClass("ui-widget-content");
+			    
+			    // add classes
+			    $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+			    $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+			   
+			   
+			    $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+			    $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+			    $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+			    $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+			    $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+			    $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+			    $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+			    $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+			  
+				$( ".ui-icon.ui-icon-seek-prev" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+				$(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+				
+				$( ".ui-icon.ui-icon-seek-first" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+			  	$(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");		  	
+	
+			  	$( ".ui-icon.ui-icon-seek-next" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+			  	$(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+			  	
+			  	$( ".ui-icon.ui-icon-seek-end" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+			  	$(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+			  	
+			  	
+			  
+			  
+			    // update buttons
+			    
+			    $(window).on('resize.jqGrid', function () {
+					$("#jqgrid").jqGrid( 'setGridWidth', $("#content").width() );
+				});
+
+
+			} // end function
+                        
+	};
+	
+	loadScript("{{asset("js/plugin/jqgrid/grid.locale-es.min.js")}}", pagefunction);
+        
+        $("form").submit(function(e){
+            e.preventDefault();
+            var gridData = $("#jqgrid").getRowData();
+            var formData=$(this).serializeArray();
+
+            console.log(formData); 
+            gridData.forEach( function (ele,index) {
+            delete ele.act;
+            
+                 for (var i in ele) {
+                   var art=new Object();
+                    art.name=i.replace(/__name__/g, index);
+                    art.value=ele[i];
+                    //formData.push(art);
+                    formData.splice(formData.length-1,0,art);
+                  //console.log(art); 
+                }
+            
+            
+            });
+            //console.log(formData); 
+            loadURLPost($(this).attr("action"),container,formData);
+       });
+      
 </script> 
+
 {% endblock %}
