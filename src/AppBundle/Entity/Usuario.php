@@ -720,7 +720,7 @@ class Usuario extends BaseUser
             $this->temp = null;
             }catch(\Exception $e){
                $this->temp = null; 
-            }
+        }
             
         }
         $this->file = null;
