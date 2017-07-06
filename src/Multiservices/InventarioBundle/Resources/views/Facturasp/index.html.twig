@@ -9,7 +9,7 @@
                 <th>Factura Nº</th>
                 <th>Fecha</th>
                 <th>Proveedor</th>
-                <th>Estado</th>
+             
                 <th>Totalfactura</th>
                 <th>Fechapago</th>
                 
@@ -22,7 +22,7 @@
                 <td><a href="#{{ path('facturasp_show', { 'id': entity.codfactura }) }}">{{ entity.codfactura }}</a></td>
                 <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.codproveedor }}</td>
-                <td>{{ entity.estado }}</td>
+             
                 <td>{{ entity.totalfactura|number_format(2, '.', ',') }}</td>
                 <td>{% if entity.fechapago %}{{ entity.fechapago|date('Y-m-d') }}{% endif %}</td>
                 
