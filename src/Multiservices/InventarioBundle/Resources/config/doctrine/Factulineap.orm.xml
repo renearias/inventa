@@ -56,6 +56,7 @@
     <field name="cantidad" type="float" column="cantidad" precision="10" scale="0" nullable="false"/>
     <field name="precio" type="float" column="precio" precision="10" scale="0" nullable="false"/>
     <field name="importe" type="float" column="importe" precision="10" scale="0" nullable="true"/>
+    <field name="iva" type="boolean" column="iva" nullable="true"/>
     <field name="dcto" type="boolean" column="dcto" nullable="true"/>
   </entity>
 </doctrine-mapping>

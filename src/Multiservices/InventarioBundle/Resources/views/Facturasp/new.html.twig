@@ -4,6 +4,7 @@
 <script type="text/javascript">
     var protocodigo=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.codigo)|e('html_attr')}}").text();
     var protocantidad=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.cantidad)|e('html_attr')}}").text();
+    var protoiva=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.iva)|e('html_attr')}}").text();
     var protodetallecodunico=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.articulosdetail.vars.prototype.codunico)|e('html_attr')}}").text();
     var protoproto=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.articulosdetail.vars.prototype)|e('html_attr')}}").text();
     protoproto=protoproto.replace(/__name__/g, "1");
@@ -24,6 +25,7 @@
         var nomcantidad=formname+"[compra_articulos][__name__][cantidad]";
         var nomproducto=formname+"[compra_articulos][__name__][codigo]";
         var nomprecio=formname+"[compra_articulos][__name__][precio]";
+        var nomiva=formname+"[compra_articulos][__name__][iva]";
         var nomdetallemac=formname+"[compra_articulos][__name__][articulosdetail][__name2__][codunico]";
         var nomdetalleestatus=formname+"[compra_articulos][__name__][articulosdetail][__name2__][estatus]";
         var nomdetallecodarticulo=formname+"[compra_articulos][__name__][articulosdetail][__name2__][codarticulo]";
@@ -112,13 +114,14 @@
 				//data : jqgrid_data,
 				datatype : "local",
 				height : 'auto',
-				colNames : ['Actions','Producto', 'Cantidad','Precio','Total'],
+				colNames : ['Actions','Producto', 'Cantidad','Precio','Iva','Total'],
 				colModel : [
 					{ name : 'act', index:'act', sortable:false }, 
 					//{ name : 'id', index : 'id' },
 					{ name : nomproducto, index : nomproducto, editable : true, editrules:{required:true}, edittype:"select",formatter:'select',editoptions:{class:"",value:stringarticulos}},
 					{ name : nomcantidad, index : nomcantidad, editable : true,editrules:{number:true,required:true}}, 
                                         { name : nomprecio, index : nomprecio, editable : true ,editrules:{number:true,required:true}}, 
+                                        { name : nomiva, index : nomiva, editable : true ,edittype:'checkbox',editoptions: { value:"1:0" },editrules:{boolean:true}}, 
                                         { name : "total", index : "total",formatter:'number',summaryType:'sum',summaryTpl:'Total: {0}'} 
                                         
 					//{ name : 'amount', index : 'amount', align : "right", editable : true }, 
@@ -331,6 +334,8 @@
                                                  
                                                   var c=$("#jqgrid").getCell(rowid,nomcantidad);
                                                   var p=$("#jqgrid").getCell(rowid,nomprecio);
+                                                  var iva=$("#jqgrid").getCell(rowid,nomiva);
+                                                  console.log("iva",iva);
                                                   $("#jqgrid").setCell(rowid,'total',c*p);
                                                   recalcular();
                                       

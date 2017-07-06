@@ -34,6 +34,11 @@ class Factulineap
     private $precio;
 
     /**
+     * @var boolean
+     */
+    private $iva;
+    
+    /**
      * @var float
      */
     private $importe;
@@ -222,6 +227,29 @@ public function setArticulosdetail($articulosdetail) {
     public function getImporte()
     {
         return $this->importe;
+    }
+    
+    /**
+     * Set iva
+     *
+     * @param float $iva
+     * @return Factulineap
+     */
+    public function setIva($iva)
+    {
+        $this->iva = $iva;
+
+        return $this;
+    }
+
+    /**
+     * Get iva
+     *
+     * @return float 
+     */
+    public function getIva()
+    {
+        return $this->iva;
     }
 
     /**

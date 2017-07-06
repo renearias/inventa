@@ -21,6 +21,7 @@ class FactulineapType extends AbstractType
            ->add('codigo',null,array('label' => 'Producto: '))
             ->add('cantidad')
             ->add('precio')
+            ->add('iva')
             ->add('articulosdetail', CollectionType::class, array('entry_type' => ArticulosDetalleType::class,
                                                          'allow_add'    => true,
                                                          'allow_delete' => true,
