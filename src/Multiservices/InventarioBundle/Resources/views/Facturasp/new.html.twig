@@ -114,7 +114,7 @@
 				//data : jqgrid_data,
 				datatype : "local",
 				height : 'auto',
-				colNames : ['Actions','Producto', 'Cantidad','Precio','Iva','Total'],
+				colNames : ['Actions','Producto', 'Cantidad','Precio','Iva','Total','TotalIva'],
 				colModel : [
 					{ name : 'act', index:'act', sortable:false }, 
 					//{ name : 'id', index : 'id' },
@@ -122,7 +122,8 @@
 					{ name : nomcantidad, index : nomcantidad, editable : true,editrules:{number:true,required:true}}, 
                                         { name : nomprecio, index : nomprecio, editable : true ,editrules:{number:true,required:true}}, 
                                         { name : nomiva, index : nomiva, editable : true ,edittype:'checkbox',editoptions: { value:"1:0" },editrules:{boolean:true}}, 
-                                        { name : "total", index : "total",formatter:'number',summaryType:'sum',summaryTpl:'Total: {0}'} 
+                                        { name : "total", index : "total",formatter:'number',summaryType:'sum',summaryTpl:'Total: {0}'},
+                                        { name : "totaliva", index : "totaliva",formatter:'number',summaryType:'sum',summaryTpl:'TotalIva: {0}'} 
                                         
 					//{ name : 'amount', index : 'amount', align : "right", editable : true }, 
 					//{ name : 'tax', index : 'tax', align : "right", editable : true }, 
@@ -238,8 +239,8 @@
                                     foottitle['total']=parseTotal;
                                     $("#jqgrid").jqGrid('footerData', 'set', foottitle);
                                     
-                                    var parseIva=parseTotal*0.14;
-                                    var parseTotalConIva=parseTotal*1.14;
+                                    var parseIva=parseTotal*0.12;
+                                    var parseTotalConIva=parseTotal*1.12;
                                     
                                     var $footRow = $("#jqgrid").closest(".ui-jqgrid-bdiv")
                                     .next(".ui-jqgrid-sdiv")
@@ -335,8 +336,10 @@
                                                   var c=$("#jqgrid").getCell(rowid,nomcantidad);
                                                   var p=$("#jqgrid").getCell(rowid,nomprecio);
                                                   var iva=$("#jqgrid").getCell(rowid,nomiva);
-                                                  console.log("iva",iva);
-                                                  $("#jqgrid").setCell(rowid,'total',c*p);
+                                                  var total=c*p;
+                                                  var totalIVA=total*(1+(0.12*iva));
+                                                  $("#jqgrid").setCell(rowid,'total',total);
+                                                  $("#jqgrid").setCell(rowid,'totaliva',totalIVA);
                                                   recalcular();
                                       
                                          }
@@ -346,7 +349,11 @@
                                              aftersavefunc: function(rowid, response) {
                                                   var c=$("#jqgrid").getCell(rowid,nomcantidad);
                                                   var p=$("#jqgrid").getCell(rowid,nomprecio);
-                                                  $("#jqgrid").setCell(rowid,'total',c*p);
+                                                  var iva=$("#jqgrid").getCell(rowid,nomiva);
+                                                  var total=c*p;
+                                                  var totalIVA=total*(1+(0.12*iva));
+                                                  $("#jqgrid").setCell(rowid,'total',total);
+                                                  $("#jqgrid").setCell(rowid,'totaliva',totalIVA);
                                                   recalcular();
         
                                          }
