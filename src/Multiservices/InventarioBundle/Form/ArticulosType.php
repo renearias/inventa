@@ -24,7 +24,7 @@ class ArticulosType extends AbstractType
            // ->add('codproveedor1',null,array('label'=>'Proveedor 1'))     
            // ->add('codproveedor2',null,array('label'=>'Proveedor 2'))     
           
-          //  ->add('codubicacion')
+            ->add('codubicacion',null,array('label'=>'Procedencia'))
             ->add('stock',null,array('label'=>'Articulos en Stock'))     
          //   ->add('stockMinimo')
          //   ->add('avisoMinimo')

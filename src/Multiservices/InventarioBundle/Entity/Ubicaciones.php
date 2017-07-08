@@ -80,4 +80,8 @@ class Ubicaciones
     {
         return $this->codubicacion;
     }
+    
+    public function __toString() {
+        return $this->getNombre();
+    }
 }

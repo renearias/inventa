@@ -859,6 +859,6 @@ class Articulos
     }
     public function __toString()
     {
-    return $this->getDescripcion();
+    return $this->getDescripcion()." - ".$this->getCodubicacion() ;
     }
 }
