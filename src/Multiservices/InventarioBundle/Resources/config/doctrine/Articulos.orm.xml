@@ -38,7 +38,14 @@
     <!--<field name="codproveedor1" type="integer" column="codproveedor1" nullable="true"/>
     <field name="codproveedor2" type="integer" column="codproveedor2" nullable="true"/>-->
     <field name="descripcionCorta" type="string" column="descripcion_corta" length="30" nullable="true"/>
-    <field name="codubicacion" type="integer" column="codubicacion" nullable="true"/>
+    
+    
+    <many-to-one field="codubicacion" target-entity="Ubicaciones">
+      <join-columns>
+        <join-column name="codubicacion" referenced-column-name="codubicacion"/>
+      </join-columns>
+    </many-to-one>
+    
     <field name="stock" type="integer" column="stock" nullable="false"/>
     <field name="stockMinimo" type="integer" column="stock_minimo" nullable="true"/>
     <field name="avisoMinimo" type="string" column="aviso_minimo" length="1" nullable="true"/>
