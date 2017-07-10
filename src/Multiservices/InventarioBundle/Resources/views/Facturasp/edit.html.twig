@@ -3,6 +3,7 @@
  <script type="text/javascript">
     var protocodigo=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.codigo)|e('html_attr')}}").text();
     var protocantidad=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.cantidad)|e('html_attr')}}").text();
+    var protoiva=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.iva)|e('html_attr')}}").text();
     var protodetallecodunico=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.articulosdetail.vars.prototype.codunico)|e('html_attr')}}").text();
     var protoproto=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.articulosdetail.vars.prototype)|e('html_attr')}}").text();
     protoproto=protoproto.replace(/__name__/g, "1");
@@ -24,6 +25,7 @@
         var nomcantidad=formname+"[compra_articulos][__name__][cantidad]";
         var nomproducto=formname+"[compra_articulos][__name__][codigo]";
         var nomprecio=formname+"[compra_articulos][__name__][precio]";
+        var nomiva=formname+"[compra_articulos][__name__][iva]";
         var nomdetalle=formname+"[compra_articulos][__name__][articulosdetail]";
         
         var nomdetallemac=formname+"[compra_articulos][__name__][articulosdetail][__name2__][codunico]";
@@ -41,6 +43,7 @@
         dataproto['{{loop.index0}}'][nomproducto]="{{articulo.codigo.getId()}}";
         dataproto['{{loop.index0}}'][nomcantidad]="{{articulo.cantidad}}";
         dataproto['{{loop.index0}}'][nomprecio]="{{articulo.precio}}";
+        dataproto['{{loop.index0}}'][nomiva]="{{articulo.iva}}";
         dataproto['{{loop.index0}}']['total']=dataproto['{{loop.index0}}'][nomprecio]*dataproto['{{loop.index0}}'][nomcantidad];
         subjqgrid_data['{{articulo.getId()}}']=[];
                  {% for detalle in edit_form.compra_articulos.vars.data[loop.index0].articulosdetail %}
@@ -143,13 +146,14 @@
 				data : dataproto,
 				datatype : "local",
 				height : 'auto',
-				colNames : ['Actions','Producto', 'Cantidad','Precio','Total'],
+				colNames : ['Actions','Producto', 'Cantidad','Precio','Iva','Total','TotalIva'],
 				colModel : [
 					{ name : 'act', index:'act', sortable:false }, 
 					//{ name : nomid, index : nomid, key:true},
 					{ name : nomproducto, index : nomproducto, editable : true, editrules:{required:true}, edittype:"select",formatter:'select',editoptions:{class:"",value:stringarticulos}},
 					{ name : nomcantidad, index : nomcantidad, editable : true,editrules:{number:true,required:true}}, 
                                         { name : nomprecio, index : nomprecio, editable : true ,editrules:{number:true,required:true}}, 
+                                        { name : nomiva, index : nomiva, editable : true ,edittype:'checkbox',editoptions: { value:"1:0" },editrules:{boolean:true}}, 
                                         { name : "total", index : "total",formatter:'number',summaryType:'sum',summaryTpl:'Total: {0}'} 
                                         
 					//{ name : 'amount', index : 'amount', align : "right", editable : true }, 
@@ -372,7 +376,11 @@
                                                  
                                                   var c=$("#jqgrid").getCell(rowid,nomcantidad);
                                                   var p=$("#jqgrid").getCell(rowid,nomprecio);
-                                                  $("#jqgrid").setCell(rowid,'total',c*p);
+                                                  var iva=$("#jqgrid").getCell(rowid,nomiva);
+                                                  var total=c*p;
+                                                  var totalIVA=total*(1+(0.12*iva));
+                                                  $("#jqgrid").setCell(rowid,'total',total);
+                                                  $("#jqgrid").setCell(rowid,'totaliva',totalIVA);
                                                   recalcular();
                                       
                                          }
@@ -382,7 +390,11 @@
                                              aftersavefunc: function(rowid, response) {
                                                   var c=$("#jqgrid").getCell(rowid,nomcantidad);
                                                   var p=$("#jqgrid").getCell(rowid,nomprecio);
-                                                  $("#jqgrid").setCell(rowid,'total',c*p);
+                                                  var iva=$("#jqgrid").getCell(rowid,nomiva);
+                                                  var total=c*p;
+                                                  var totalIVA=total*(1+(0.12*iva));
+                                                  $("#jqgrid").setCell(rowid,'total',total);
+                                                  $("#jqgrid").setCell(rowid,'totaliva',totalIVA);
                                                   recalcular();
         
                                          }
