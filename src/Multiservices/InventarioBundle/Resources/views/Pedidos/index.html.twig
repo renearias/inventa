@@ -9,7 +9,7 @@
                 
                 <th>Fecha</th>
                 <th>Cliente</th>
-                <th>Estado</th>
+               
                 
                 <th>Actions</th>
             </tr>
@@ -20,7 +20,7 @@
                 <td><a href="#{{ path('pedidos_show', { 'id': entity.codpedido }) }}">{{ entity.codpedido }}</a></td>
                 <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i') }}{% endif %}</td>
                 <td>{{ entity.codcliente }}</td>
-                <td>{{ entity.estado }}</td>
+               
                 
                 <td>
                 <ul>
