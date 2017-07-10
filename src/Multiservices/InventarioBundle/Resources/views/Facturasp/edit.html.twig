@@ -154,7 +154,8 @@
 					{ name : nomcantidad, index : nomcantidad, editable : true,editrules:{number:true,required:true}}, 
                                         { name : nomprecio, index : nomprecio, editable : true ,editrules:{number:true,required:true}}, 
                                         { name : nomiva, index : nomiva, editable : true ,edittype:'checkbox',editoptions: { value:"1:0" },editrules:{boolean:true}}, 
-                                        { name : "total", index : "total",formatter:'number',summaryType:'sum',summaryTpl:'Total: {0}'} 
+                                        { name : "total", index : "total",formatter:'number',summaryType:'sum',summaryTpl:'Total: {0}'},
+                                        { name : "totaliva", index : "totaliva",formatter:'number',summaryType:'sum',summaryTpl:'TotalIva: {0}'} 
                                         
 					//{ name : 'amount', index : 'amount', align : "right", editable : true }, 
 					//{ name : 'tax', index : 'tax', align : "right", editable : true }, 
