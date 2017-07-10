@@ -3,7 +3,7 @@
  <script type="text/javascript">
     var protocodigo=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.codigo)|e('html_attr')}}").text();
     var protocantidad=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.cantidad)|e('html_attr')}}").text();
-    var protoiva=$("<div/>").html("{{form_widget(form.compra_articulos.vars.prototype.iva)|e('html_attr')}}").text();
+    var protoiva=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.iva)|e('html_attr')}}").text();
     var protodetallecodunico=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.articulosdetail.vars.prototype.codunico)|e('html_attr')}}").text();
     var protoproto=$("<div/>").html("{{form_widget(edit_form.compra_articulos.vars.prototype.articulosdetail.vars.prototype)|e('html_attr')}}").text();
     protoproto=protoproto.replace(/__name__/g, "1");
