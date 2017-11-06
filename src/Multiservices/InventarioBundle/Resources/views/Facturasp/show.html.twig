@@ -16,7 +16,7 @@
             </tr>
             <tr>
                 <th>Total Factura</th>
-                <td>{{ entity.totalfactura }}</td>
+                <td>{{ entity.totalfactura|number_format(2, '.', ',') }}</td>
             </tr>
             <tr>
                 <th>Fecha de Pago</th>
