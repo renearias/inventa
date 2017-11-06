@@ -65,21 +65,21 @@
                         <th></th>
                         <th></th>
                         <th>Total</th>
-                        <td>{{ entity.totalfactura/1.12 }}</td>
+                        <td>{{ entity.totalfactura/1.12|number_format(2, '.', ',') }}</td>
                     </tr>
                     <tr>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th>Iva</th>
-                        <td>{{ entity.totalfactura/1.12*0.12 }}</td>
+                        <td>{{ entity.totalfactura/1.12*0.12|number_format(2, '.', ',') }}</td>
                     </tr>    
                     <tr>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th>Total Factura</th>
-                        <td>{{ entity.totalfactura }}</td>
+                        <td>{{ entity.totalfactura|number_format(2, '.', ',') }}</td>
                     </tr>
                     </tfoot>
                    </table>
